@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "client_NF",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
