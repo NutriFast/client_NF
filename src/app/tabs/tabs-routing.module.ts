@@ -3,17 +3,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
+  // TODO: AJUSTAR HIERARQUIA DAS ROTAS
   {
     path: 'tabs',
     component: TabsPage,
     children: [
       {
-        path: 'home',
-        loadChildren: () => import('../pages/home/home.module').then(m => m.HomePageModule)
+        path: 'list',
+        loadChildren: () => import('../pages/patients/list/list-patients.module').then(m => m.ListPatientsModule)
       },
       {
-        path: 'patients',
-        loadChildren: () => import('../pages/patients/patients.module').then(m => m.PatientsPageModule)
+        path: 'patient',
+        loadChildren: () => import('../pages/patients/patient/patient.module').then(m => m.PatientPageModule)
       },
       {
         path: 'config',
@@ -25,14 +26,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/home',
+        redirectTo: '/tabs/list',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/home',
+    redirectTo: '/tabs/list',
     pathMatch: 'full'
   }
 ];

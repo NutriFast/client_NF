@@ -3,10 +3,10 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { PatientsPage } from './patients.page';
-import { ExploreContainerComponentModule } from '../../components/explore-container/explore-container.module';
+import { PatientPage } from './patient.page';
+import { ExploreContainerComponentModule } from '../../../components/explore-container/explore-container.module';
 
-import { PatientsPageRoutingModule } from './patients-routing.module';
+import { PatientPageRoutingModule } from './patient-routing.module';
 
 @NgModule({
   imports: [
@@ -14,8 +14,8 @@ import { PatientsPageRoutingModule } from './patients-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    PatientsPageRoutingModule
+    PatientPageRoutingModule
   ],
-  declarations: [PatientsPage]
+  declarations: [PatientPage]
 })
-export class PatientsPageModule {}
+export class PatientPageModule {}
