@@ -17,6 +17,8 @@ ion-card-header {
   align-items: center;
 
   flex-direction: column;
+
+  padding: 16px 16px 10px 16px;
 }
 
 ion-card-title {
@@ -32,3 +34,22 @@ ion-avatar {
   height: 62px;
 }
 
+ion-card-content {
+  display: flex;
+  flex-direction: column;
+
+  > div {
+    > b {
+      font-family: 'Montserrat';
+      font-size: 13px;
+      font-weight: bold;
+
+      margin-right: 8px;
+    }
+
+    > span {
+      font-family: 'Montserrat';
+      font-size: 13px;
+    }
+  }
+}
