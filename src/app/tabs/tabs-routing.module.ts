@@ -10,11 +10,15 @@ const routes: Routes = [
     children: [
       {
         path: 'list',
-        loadChildren: () => import('../pages/patients/list/list-patients.module').then(m => m.ListPatientsModule)
+        loadChildren: () => import('../pages/patient/list/list-patients.module').then(m => m.ListPatientsModule)
       },
       {
         path: 'patient',
-        loadChildren: () => import('../pages/patients/patient/patient.module').then(m => m.PatientPageModule)
+        loadChildren: () => import('../pages/patient/patient/patient.module').then(m => m.PatientPageModule)
+      },
+      {
+        path: 'new',
+        loadChildren: () => import('../pages/patient/new/new.module').then(m => m.NewPageModule)
       },
       {
         path: 'config',
@@ -35,7 +39,7 @@ const routes: Routes = [
     path: '',
     redirectTo: '/tabs/list',
     pathMatch: 'full'
-  }
+  },
 ];
 
 @NgModule({
