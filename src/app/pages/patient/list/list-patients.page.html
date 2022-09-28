@@ -5,11 +5,8 @@
     </ion-row>
 
     <ion-row justify-content-center>
-      <ion-col>
-        <app-card></app-card>
-      </ion-col>
-      <ion-col>
-        <app-card></app-card>
+      <ion-col *ngFor="let patient of patients; let colIndex=index">
+        <app-card [patient]="patient"></app-card>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -1,23 +1,26 @@
-<ion-card (click)="goTo('tabs/patient')">
+<ion-card
+  [routerLink]="[path]"
+  [queryParams]="{ id: patient.id }"
+>
   <ion-card-header>
     <ion-avatar>
-      <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      <img src="{{patient.imgUrl}}">
     </ion-avatar>
-    <ion-card-title>Nome do Paciente</ion-card-title>
+    <ion-card-title>{{patient.name}}</ion-card-title>
   </ion-card-header>
 
   <ion-card-content>
     <div>
       <b>Sexo.:</b>
-      <span>Masculino</span>
+      <span>{{patient.sex}}</span>
     </div>
     <div>
       <b>Idade.:</b>
-      <span>24 anos</span>
+      <span>{{patient.age}} anos</span>
     </div>
     <div>
       <b>Gasto en.:</b>
-      <span>2.000 Kcal</span>
+      <span>{{patient.kcal}} Kcal</span>
     </div>
   </ion-card-content>
 </ion-card>

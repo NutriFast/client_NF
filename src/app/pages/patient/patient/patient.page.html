@@ -2,31 +2,31 @@
   <div class="container">
     <div class="avatar-wrapper">
         <ion-avatar>
-          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+          <img src="{{patient.imgUrl}}">
         </ion-avatar>
-        <h3>Nome do Paciente</h3>
-        (61) 3462-1333
+        <h3>{{patient.name}}</h3>
+        {{patient.telephone}}
     </div>
 
     <ion-grid>
       <ion-row>
         <ion-col>
           <b>Idade</b>
-          <span>23 anos</span>
+          <span>{{patient.age}} anos</span>
         </ion-col>
         <ion-col>
           <b>Peso</b>
-          <span>74 kg</span>
+          <span>{{patient.weight}} kg</span>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
           <b>Altura</b>
-          <span>1.80</span>
+          <span>{{patient.height}}</span>
         </ion-col>
         <ion-col>
           <b>Sexo</b>
-          <span>Masculino</span>
+          <span>{{patient.sex}}</span>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -34,7 +34,7 @@
     <div class="calc-wrapper">
       <div class="calc-info">
         <span>Último gasto energético calculado</span>
-        <h2>2.000 Kcal</h2>
+        <h2>{{patient.kcal}} Kcal</h2>
       </div>
       <ion-button shape="round">Calcular</ion-button>
     </div>

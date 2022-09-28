@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+
+import { Patient } from '../../pages/patient/list/list-patients.page';
 
 @Component({
   selector: 'app-card',
@@ -7,12 +8,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
+  @Input() patient: Patient;
 
-  constructor(private route: Router) { }
+  path = '/tabs/patient';
+
+  constructor() { }
 
   ngOnInit() {}
-
-  goTo(path: string) {
-    this.route.navigate([path]);
-  }
 }
