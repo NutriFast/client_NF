@@ -14,7 +14,7 @@ const routes: Routes = [
       },
       {
         path: 'patient',
-        loadChildren: () => import('../pages/patient/patient/patient.module').then(m => m.PatientPageModule)
+        loadChildren: () => import('../pages/patient/patient/patient.module').then(m => m.PatientPageModule),
       },
       {
         path: 'new',
