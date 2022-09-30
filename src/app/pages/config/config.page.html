@@ -1,9 +1,24 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Página 2!</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <div class="container">
+    <ion-item lines="none">
+      <ion-label>Conta</ion-label>
+    </ion-item>
 
+    <ion-item lines="full">
+      <ion-icon name="log-out-outline" slot="start"></ion-icon>
+      <ion-button (click)="logOut()" shape="round" color="danger" class="logout-button">
+        SAIR
+      </ion-button>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label>Configurações</ion-label>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-icon name="moon-outline" slot="start"></ion-icon>
+      <ion-label>Alterar tema (To Do)</ion-label>
+      <ion-toggle slot="end"></ion-toggle>
+    </ion-item>
+  </div>
 </ion-content>
