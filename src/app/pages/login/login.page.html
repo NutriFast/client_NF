@@ -12,7 +12,7 @@
     <ion-button [disabled]="true" shape="round">Entrar</ion-button>
     <p>Não Possui uma conta?</p>
 
-    <ion-button class="google-button" shape="round" color="light">
+    <ion-button (click)="signInWithGoogle()" class="google-button" shape="round" color="light">
       <ion-icon slot="start" name="logo-google"></ion-icon>
       Entrar com o Google
     </ion-button>

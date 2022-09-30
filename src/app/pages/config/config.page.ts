@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-config',
@@ -7,6 +8,14 @@ import { Component } from '@angular/core';
 })
 export class ConfigPage {
 
-  constructor() {}
+  constructor(private router: Router) {}
 
+  logOut() {
+    this.setLocalStorageUnauthenticated();
+    this.router.navigateByUrl('login');
+  }
+
+  setLocalStorageUnauthenticated() {
+    localStorage.setItem('authenticated', '0');
+  }
 }
