@@ -1,0 +1,10 @@
+{
+  "/api/*": {
+    "target": "https://nutrifast.icu",
+    "secure": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}
