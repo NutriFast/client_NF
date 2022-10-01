@@ -11,8 +11,6 @@ export class AuthGuard implements CanLoad {
   canLoad() {
     const isAuthenticated = !!(+localStorage.getItem('authenticated'));
 
-    console.log(isAuthenticated);
-
     if (isAuthenticated) {
       return true;
     } else {

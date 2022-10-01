@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { AuthService } from '../../services/auth/auth.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -9,7 +11,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class LoginPage implements OnInit {
   redirectAfterLoginUrl = '';
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
     this.redirectAfterLoginUrl = this.getRedirectAfterLoginUrl();
@@ -24,8 +30,15 @@ export class LoginPage implements OnInit {
   }
 
   signInWithGoogle() {
-    this.setLocalStorageAuthenticated();
-    this.router.navigateByUrl(this.redirectAfterLoginUrl);
+    this.getGoogleAuthJWTToken();
+    /* this.setLocalStorageAuthenticated();
+    this.router.navigateByUrl(this.redirectAfterLoginUrl); */
+  }
+
+  getGoogleAuthJWTToken() {
+    this.authService.getGoogleAuth().subscribe(response => {
+      console.log({response});
+    });
   }
 
   setLocalStorageAuthenticated() {
