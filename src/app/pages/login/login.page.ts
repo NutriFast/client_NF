@@ -30,9 +30,9 @@ export class LoginPage implements OnInit {
   }
 
   signInWithGoogle() {
-    this.getGoogleAuthJWTToken();
-    /* this.setLocalStorageAuthenticated();
-    this.router.navigateByUrl(this.redirectAfterLoginUrl); */
+    /* this.getGoogleAuthJWTToken(); */
+    this.setLocalStorageAuthenticated();
+    this.router.navigateByUrl(this.redirectAfterLoginUrl);
   }
 
   getGoogleAuthJWTToken() {
