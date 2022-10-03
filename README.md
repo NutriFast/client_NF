@@ -14,7 +14,7 @@
       ionic cli --version 
       6.20.1
      
-## Run app locally
+## Rodar app localmente
 
   * Browser
 
@@ -22,14 +22,14 @@
     
 * Cordova / Android Studio
 
-  * Build and Sync changes 
+  * Build / Sync alterações 
 
         ionic build 
     
         ionic capacitor copy android
     
-  * Open project on Android Studio
+  * Abrir o app no Android Studio
     
         ionic capacitor open android
         
-  * Run app on Android Studio (Shift + F10)
+  * Rodar o app no Android Studio (Shift + F10)
