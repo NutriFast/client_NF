@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { ClientService } from 'src/app/services/client/client.service';
 
 export interface Patient {
   id: string;
@@ -28,10 +30,19 @@ export const mockedPatients: Array<Patient> = [
   styleUrls: ['list-patients.page.scss']
 })
 
-export class ListPatientsPage {
+export class ListPatientsPage implements OnInit {
 
   public patients: Array<Patient> = mockedPatients;
 
-  constructor() {}
+  constructor(private clientService: ClientService) {}
 
+  ngOnInit() {
+    this.getPatients();
+  }
+
+  getPatients() {
+    this.clientService.getClients().subscribe(response => {
+      console.log({response});
+    });
+  }
 }
