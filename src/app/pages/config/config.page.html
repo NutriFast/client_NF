@@ -1,9 +1,14 @@
 <ion-content>
   <div class="container">
     <ion-item lines="none">
-      <ion-label>Conta</ion-label>
+      <ion-title>
+        Settings:
+      </ion-title>
     </ion-item>
-
+    <ion-item lines="none">
+      <ion-icon name="person-outline" slot="start"></ion-icon>
+      <ion-label >Dados pessoais:</ion-label>
+    </ion-item>
     <ion-item lines="full">
       <ion-icon name="log-out-outline" slot="start"></ion-icon>
       <ion-button (click)="logOut()" shape="round" color="danger" class="logout-button">
