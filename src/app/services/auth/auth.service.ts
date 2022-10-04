@@ -10,6 +10,6 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   getGoogleAuth() {
-    return this.http.get('https://nutrifast.icu/auth');
+    return this.http.get('https://macro-key-346005.web.app/auth');
   }
 }
