@@ -1,9 +1,10 @@
 import { IonicModule } from '@ionic/angular';
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { PatientPage } from './patient.page';
-import { ExploreContainerComponentModule } from '../../../components/explore-container/explore-container.module';
 
 import { PatientPageRoutingModule } from './patient-routing.module';
 
@@ -12,7 +13,6 @@ import { PatientPageRoutingModule } from './patient-routing.module';
     IonicModule,
     CommonModule,
     FormsModule,
-    ExploreContainerComponentModule,
     PatientPageRoutingModule
   ],
   declarations: [PatientPage]

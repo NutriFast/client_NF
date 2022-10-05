@@ -1,11 +1,11 @@
 import { IonicModule } from '@ionic/angular';
+
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ConfigPage } from './config.page';
-import { ExploreContainerComponentModule } from '../../components/explore-container/explore-container.module';
 
+import { ConfigPage } from './config.page';
 import { ConfigPageRoutingModule } from './config-routing.module';
 
 @NgModule({
@@ -13,7 +13,6 @@ import { ConfigPageRoutingModule } from './config-routing.module';
     IonicModule,
     CommonModule,
     FormsModule,
-    ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: ConfigPage }]),
     ConfigPageRoutingModule,
   ],

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Patient } from '../../pages/patient/list/list-patients.page';
+import { Patient } from 'src/app/pages/patient/list/list-patients.page';
 
 @Component({
   selector: 'app-card',
