@@ -1,20 +1,25 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
-import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import { GoogleAuth, User } from '@codetrix-studio/capacitor-google-auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  googleUser: any;
+  public googleUser: User;
+  public accessToken: string;
 
   constructor() { }
 
-  async getGoogleAuth() {
+  async authenticateWithGoogle() {
     const response = await GoogleAuth.signIn();
-    this.googleUser = response;
+    const accessToken = response.authentication.accessToken;
 
-		return this.googleUser;
+    console.log(response);
+
+    if(accessToken) {
+      this.googleUser = response;
+      this.accessToken = accessToken;
+    }
   }
 }
