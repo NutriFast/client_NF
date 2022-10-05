@@ -1,15 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  data: any;
+  googleUser: any;
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
-  getGoogleAuth() {
-    return this.http.get('https://macro-key-346005.web.app/auth');
+  async getGoogleAuth() {
+    const response = await GoogleAuth.signIn();
+    this.googleUser = response;
+
+		return this.googleUser;
   }
 }

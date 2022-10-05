@@ -11,9 +11,21 @@ import { AppComponent } from './app.component';
 import { HeaderComponentModule } from './components/header/header.module';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HeaderComponentModule, HttpClientModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-  bootstrap: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    HeaderComponentModule,
+    HttpClientModule
+  ],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  ],
+  bootstrap: [
+    AppComponent
+  ],
 })
 export class AppModule {}

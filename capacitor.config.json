@@ -2,5 +2,12 @@
 	"appId": "io.nutrifast.starter",
 	"appName": "client_NF",
 	"webDir": "www",
-	"bundledWebRuntime": false
+	"bundledWebRuntime": false,
+  "plugins": {
+    "GoogleAuth": {
+      "scopes": ["profile", "email"],
+      "serverClientId": "586885413478-qrg9b4f1c6q04ksb3l3m8897ddmbl3bm.apps.googleusercontent.com",
+      "forceCodeForRefreshToken": true
+    }
+  }
 }

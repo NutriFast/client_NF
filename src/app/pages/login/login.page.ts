@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+
 import { AuthService } from '../../services/auth/auth.service';
+
+GoogleAuth.initialize({
+  clientId: '586885413478-qrg9b4f1c6q04ksb3l3m8897ddmbl3bm.apps.googleusercontent.com',
+  scopes: ['profile', 'email'],
+  grantOfflineAccess: true,
+});
 
 @Component({
   selector: 'app-login',
@@ -17,6 +25,10 @@ export class LoginPage implements OnInit {
     private authService: AuthService
   ) { }
 
+  ionViewDidEnter() {
+    GoogleAuth.initialize();
+  }
+
   ngOnInit() {
     this.redirectAfterLoginUrl = this.getRedirectAfterLoginUrl();
   }
@@ -30,15 +42,15 @@ export class LoginPage implements OnInit {
   }
 
   signInWithGoogle() {
-    /* this.getGoogleAuthJWTToken(); */
-    this.setLocalStorageAuthenticated();
-    this.router.navigateByUrl(this.redirectAfterLoginUrl);
+    this.getGoogleAuthJWTToken();
+    /* this.setLocalStorageAuthenticated();
+    this.router.navigateByUrl(this.redirectAfterLoginUrl); */
   }
 
-  getGoogleAuthJWTToken() {
-    this.authService.getGoogleAuth().subscribe(response => {
+  async getGoogleAuthJWTToken() {
+    console.log(await this.authService.getGoogleAuth());/* .subscribe(response => {
       console.log({response});
-    });
+    }); */
   }
 
   setLocalStorageAuthenticated() {

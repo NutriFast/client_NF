@@ -4,4 +4,6 @@
     <string name="title_activity_main">client_NF</string>
     <string name="package_name">io.nutrifast.starter</string>
     <string name="custom_url_scheme">io.nutrifast.starter</string>
+
+    <string name="server_client_id">586885413478-qrg9b4f1c6q04ksb3l3m8897ddmbl3bm.apps.googleusercontent.com</string>
 </resources>
