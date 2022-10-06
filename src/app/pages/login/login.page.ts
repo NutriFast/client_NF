@@ -18,6 +18,7 @@ GoogleAuth.initialize({
 })
 export class LoginPage implements OnInit {
   redirectAfterLoginUrl = '';
+  isLoading = false;
 
   constructor(
     private router: Router,
@@ -42,6 +43,7 @@ export class LoginPage implements OnInit {
   }
 
   async signInWithGoogle() {
+    this.isLoading = true;
     await this.authService.authenticateWithGoogle();
 
     if(this.authService.googleAccessToken) {
@@ -64,6 +66,8 @@ export class LoginPage implements OnInit {
   logIn(accessToken: string) {
     this.authService.setLocalStorageToken(accessToken);
     this.authService.setLocalStorageAuthenticated();
+    this.isLoading = false;
+
     this.router.navigateByUrl(this.redirectAfterLoginUrl);
   }
 }
