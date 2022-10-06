@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { AuthResponse, AuthService } from 'src/app/services/auth/auth.service';
 
 GoogleAuth.initialize({
   clientId: '586885413478-qrg9b4f1c6q04ksb3l3m8897ddmbl3bm.apps.googleusercontent.com',
@@ -44,13 +44,26 @@ export class LoginPage implements OnInit {
   async signInWithGoogle() {
     await this.authService.authenticateWithGoogle();
 
-    if(this.authService.accessToken) {
-      this.setLocalStorageAuthenticated();
-      this.router.navigateByUrl(this.redirectAfterLoginUrl);
+    if(this.authService.googleAccessToken) {
+      this.getAccessToken();
     }
   }
 
-  setLocalStorageAuthenticated() {
-    localStorage.setItem('authenticated', '1');
+  getAccessToken() {
+    this.authService.getAccessToken()
+      .subscribe((response: AuthResponse) => {
+        const accessToken = response.accessToken;
+
+        if(accessToken) {
+          this.logIn(accessToken);
+        }
+      }
+    );
+  }
+
+  logIn(accessToken: string) {
+    this.authService.setLocalStorageToken(accessToken);
+    this.authService.setLocalStorageAuthenticated();
+    this.router.navigateByUrl(this.redirectAfterLoginUrl);
   }
 }

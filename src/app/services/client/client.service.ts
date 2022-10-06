@@ -13,7 +13,8 @@ export class ClientService {
   ) {}
 
   getClients() {
-    const headers = new HttpHeaders().set('Authorization', this.authService.accessToken);
+    const accessToken = this.authService.getAccessTokenFromLocalStorage();
+    const headers = new HttpHeaders().set('Authorization', accessToken);
 
     return this.http.get('https://macro-key-346005.web.app/clients', { headers });
   }
