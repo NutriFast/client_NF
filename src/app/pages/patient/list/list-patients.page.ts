@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { ClientService } from 'src/app/services/client/client.service';
 
@@ -33,15 +34,18 @@ export const mockedPatients: Array<Patient> = [
 export class ListPatientsPage implements OnInit {
   public patients: Array<Patient> = mockedPatients;
 
-  constructor(private clientService: ClientService) {}
+  constructor(
+    private clientService: ClientService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.getPatients();
-  }
-
-  getPatients() {
-    this.clientService.getClients().subscribe(response => {
-      console.log({response});
+    this.route.queryParams.subscribe((queryParams: any) => {
+      // pegar id do cliente
+      this.clientService.getClients().subscribe(response => {
+        console.log({response});
+      });
     });
+
   }
 }
