@@ -56,11 +56,13 @@ export class ListPatientsPage implements OnInit {
 
   ngOnInit() {
     // TODO: Buscar os pacientes de forma mais adequada
-    this.userName = localStorage.getItem('userName');
-    this.userEmail = localStorage.getItem('userEmail');
-
     this.route.queryParams.subscribe((queryParams: any) => {
+      this.userName = localStorage.getItem('userName');
+      this.userEmail = localStorage.getItem('userEmail');
+
       this.user = this.authService.googleUser;
+
+      // TODO: Removendo quando resolver o problema do login no Android
       this.clientService.getClients().subscribe((response: Array<ApiPatient>) => {
         if(response) {
           response.map((patient) => {
@@ -71,6 +73,5 @@ export class ListPatientsPage implements OnInit {
         }
       });
     });
-
   }
 }

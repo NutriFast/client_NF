@@ -17,5 +17,8 @@ export class ConfigPage {
 
   setLocalStorageUnauthenticated() {
     localStorage.setItem('authenticated', '0');
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('userEmail');
   }
 }
