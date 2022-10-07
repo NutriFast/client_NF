@@ -26,7 +26,7 @@
 
         ionic build 
     
-        ionic capacitor copy android
+        npx cap sync
     
   * Abrir o app no Android Studio
     
