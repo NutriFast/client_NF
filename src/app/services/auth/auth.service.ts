@@ -25,6 +25,10 @@ export class AuthService {
     if(googleAccessToken) {
       this.googleUser = googleUser;
       this.googleAccessToken = googleAccessToken;
+
+      // TODO: Buscar os dados do usuário da api e salvar da forma correta
+      localStorage.setItem('userName', this.googleUser.givenName);
+      localStorage.setItem('userEmail',this. googleUser.email);
     }
   }
 

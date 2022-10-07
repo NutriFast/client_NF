@@ -2,31 +2,31 @@
   <div class="container">
     <div class="avatar-wrapper">
         <ion-avatar>
-          <img src="{{patient.imgUrl}}">
+          <img src="{{imgUrl}}">
         </ion-avatar>
         <h3>{{patient.name}}</h3>
-        {{patient.telephone}}
+        {{telephone}}
     </div>
 
     <ion-grid>
       <ion-row>
         <ion-col>
           <b>Idade</b>
-          <span>{{patient.age}} anos</span>
+          <span>{{age}} anos</span>
         </ion-col>
         <ion-col class="left-col">
           <b>Peso</b>
-          <span>{{patient.weight}} kg</span>
+          <span>{{weight}} kg</span>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
           <b>Altura</b>
-          <span>{{patient.height}}</span>
+          <span>{{height}}</span>
         </ion-col>
         <ion-col class="left-col">
           <b>Sexo</b>
-          <span>{{patient.sex}}</span>
+          <span>{{patient.gender}}</span>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -34,7 +34,7 @@
     <div class="calc-wrapper">
       <div class="calc-info">
         <span>Último gasto energético calculado</span>
-        <h2>{{patient.kcal}} Kcal</h2>
+        <h2>{{kcal}} Kcal</h2>
       </div>
       <ion-button shape="round">Calcular</ion-button>
     </div>
