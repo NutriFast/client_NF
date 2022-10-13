@@ -1,42 +1,46 @@
 <ion-content>
   <div class="container">
-    <div class="avatar-wrapper">
+    <!-- <ion-spinner [ngClass]="{'isLoading': true}" name="dots"></ion-spinner>
+
+    <div [ngClass]="{'isLoading': false}"> -->
+      <div class="avatar-wrapper">
         <ion-avatar>
-          <img src="{{imgUrl}}">
+          <img src="https://ionicframework.com/docs/img/demos/avatar.svg">
         </ion-avatar>
         <h3>{{patient.name}}</h3>
-        {{telephone}}
-    </div>
-
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <b>Idade</b>
-          <span>{{age}} anos</span>
-        </ion-col>
-        <ion-col class="left-col">
-          <b>Peso</b>
-          <span>{{weight}} kg</span>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <b>Altura</b>
-          <span>{{height}}</span>
-        </ion-col>
-        <ion-col class="left-col">
-          <b>Sexo</b>
-          <span>{{patient.gender}}</span>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-    <div class="calc-wrapper">
-      <div class="calc-info">
-        <span>Último gasto energético calculado</span>
-        <h2>{{kcal}} Kcal</h2>
+        {{patient.telephone}}
       </div>
-      <ion-button shape="round">Calcular</ion-button>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <b>Idade</b>
+            <span>{{patient.age}} anos</span>
+          </ion-col>
+          <ion-col class="left-col">
+            <b>Peso</b>
+            <span>{{patient.weight}} kg</span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <b>Altura</b>
+            <span>{{patient.height}}</span>
+          </ion-col>
+          <ion-col class="left-col">
+            <b>Sexo</b>
+            <span>{{patient.gender}}</span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <div class="calc-wrapper">
+        <div class="calc-info">
+          <span>Último gasto energético calculado</span>
+          <h2>{{kcal}} Kcal</h2>
+        </div>
+        <ion-button shape="round">Calcular</ion-button>
+      </div>
     </div>
-  </div>
+  <!-- </div> -->
 </ion-content>

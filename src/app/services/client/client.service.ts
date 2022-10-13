@@ -7,6 +7,9 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root'
 })
 export class ClientService {
+  // TODO: Levar para outro arquivo
+  baseUrl = 'https://macro-key-346005.web.app/clients';
+
   constructor(
     private http: HttpClient,
     private authService: AuthService
@@ -16,6 +19,17 @@ export class ClientService {
     const accessToken = this.authService.getAccessTokenFromLocalStorage();
     const headers = new HttpHeaders().set('Authorization', accessToken);
 
-    return this.http.get('https://macro-key-346005.web.app/clients', { headers });
+    const url = this.baseUrl;
+
+    return this.http.get(url, { headers });
+  }
+
+  getClient(id: string) {
+    const accessToken = this.authService.getAccessTokenFromLocalStorage();
+    const headers = new HttpHeaders().set('Authorization', accessToken);
+
+    const url = this.baseUrl + '/' + id;
+
+    return this.http.get(url, { headers });
   }
 }

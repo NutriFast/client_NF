@@ -55,6 +55,7 @@ export class LoginPage implements OnInit {
     this.authService.getAccessToken()
       .subscribe((response: AuthResponse) => {
         const accessToken = response.accessToken;
+        console.log({accessToken});
 
         if(accessToken) {
           this.logIn(accessToken);
