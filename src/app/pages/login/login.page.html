@@ -19,7 +19,8 @@
       shape="round"
       color="light"
     >
-      <ion-icon slot="start" name="logo-google"></ion-icon>
+      <ion-icon *ngIf="isLoading === false" slot="start" name="logo-google"></ion-icon>
+      <ion-spinner *ngIf="isLoading === true" name="bubbles" color="primary" style="margin-right: 5px;"></ion-spinner>
       Entrar com o Google
     </ion-button>
   </div>
