@@ -4,10 +4,22 @@
       <ion-searchbar showCancelButton="focus"></ion-searchbar>
     </ion-row>
 
-    <ion-row justify-content-center>
-      <ion-col size-sm="3" *ngFor="let patient of patients; let colIndex=index">
-        <app-card [patient]="patient"></app-card>
-      </ion-col>
+    <ion-row *ngIf="isLoading === true" class="statusRow">
+     <ion-spinner name="bubbles" color="primary"></ion-spinner>
     </ion-row>
+
+    <div *ngIf="isLoading === false">
+      <ion-row *ngIf="patients.length > 0" justify-content-center>
+        <ion-col size-sm="3" *ngFor="let patient of patients; let colIndex=index">
+          <app-card [patient]="patient"></app-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="patients.length === 0" class="statusRow">
+        <ion-text>
+          Nenhum paciente cadastrado
+        </ion-text>
+      </ion-row>
+    </div>
   </ion-grid>
 </ion-content>

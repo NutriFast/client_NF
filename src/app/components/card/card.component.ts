@@ -15,17 +15,10 @@ export class CardComponent implements OnInit {
   gender: string;
   age: string | number;
   kcal: string | number;
-  imgUrl: string;
+  imgUrl = 'https://ionicframework.com/docs/img/demos/avatar.svg';
 
   constructor() { }
 
   ngOnInit() {
-    this.getImgUrl(this.patient);
-  }
-
-  getImgUrl(patient: Patient) {
-    if('imgUrl' in patient) {
-      this.imgUrl = 'https://ionicframework.com/docs/img/demos/avatar.svg';
-    }
   }
 }

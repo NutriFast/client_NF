@@ -1,46 +1,67 @@
 <ion-content>
   <div class="container">
-    <!-- <ion-spinner [ngClass]="{'isLoading': true}" name="dots"></ion-spinner>
+    <div class="avatar-wrapper">
+      <ion-avatar>
+        <img src="https://ionicframework.com/docs/img/demos/avatar.svg">
+      </ion-avatar>
 
-    <div [ngClass]="{'isLoading': false}"> -->
-      <div class="avatar-wrapper">
-        <ion-avatar>
-          <img src="https://ionicframework.com/docs/img/demos/avatar.svg">
-        </ion-avatar>
+      <div *ngIf="isLoading === true" class="loading">
+        <ion-spinner name="dots" color="primary"></ion-spinner>
+      </div>
+      <div *ngIf="isLoading === false">
         <h3>{{patient.name}}</h3>
         {{patient.telephone}}
       </div>
-
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <b>Idade</b>
-            <span>{{patient.age}} anos</span>
-          </ion-col>
-          <ion-col class="left-col">
-            <b>Peso</b>
-            <span>{{patient.weight}} kg</span>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <b>Altura</b>
-            <span>{{patient.height}}</span>
-          </ion-col>
-          <ion-col class="left-col">
-            <b>Sexo</b>
-            <span>{{patient.gender}}</span>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-
-      <div class="calc-wrapper">
-        <div class="calc-info">
-          <span>Último gasto energético calculado</span>
-          <h2>{{kcal}} Kcal</h2>
-        </div>
-        <ion-button shape="round">Calcular</ion-button>
-      </div>
     </div>
-  <!-- </div> -->
+
+    <ion-grid *ngIf="isLoading === true">
+      <ion-row>
+        <ion-col>
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-col>
+        <ion-col class="left-col">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-col>
+        <ion-col class="left-col">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngIf="isLoading === false">
+      <ion-row>
+        <ion-col>
+          <b>Idade</b>
+          <span>{{patient.age}} anos</span>
+        </ion-col>
+        <ion-col class="left-col">
+          <b>Peso</b>
+          <span>{{patient.weight}} kg</span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <b>Altura</b>
+          <span>{{patient.height}}</span>
+        </ion-col>
+        <ion-col class="left-col">
+          <b>Sexo</b>
+          <span>{{patient.gender}}</span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div class="calc-wrapper" *ngIf="isLoading === false">
+      <div class="calc-info">
+        <span>Último gasto energético calculado</span>
+        <h2>{{patient.kcal}} Kcal</h2>
+      </div>
+      <ion-button shape="round">Calcular</ion-button>
+    </div>
+  </div>
 </ion-content>

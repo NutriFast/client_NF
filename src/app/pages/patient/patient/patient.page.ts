@@ -13,7 +13,7 @@ import { Patient } from '../list/list-patients.page';
 export class PatientPage implements OnInit {
   patient: Patient;
   patientId: string;
-  isLoading = true;
+  isLoading: boolean;
 
   constructor(
     private clientService: ClientService,
@@ -22,22 +22,23 @@ export class PatientPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.isLoading = true;
+
     this.route.queryParams.subscribe((queryParams: any) => {
       this.patientId = queryParams.id;
 
       if(this.patientId) {
         this.clientService.getClient(this.patientId).subscribe((patient: Patient) => {
           console.log({patient});
+          this.isLoading = false;
+
           if(patient) {
             this.patient = patient;
-            this.isLoading = false;
           } else {
-            this.isLoading = false;
             this.router.navigateByUrl('/tabs/list');
           }
         });
       } else {
-        this.isLoading = false;
         this.router.navigateByUrl('/tabs/list');
       }
     });

@@ -22,24 +22,17 @@ export interface Patient {
 
 export class ListPatientsPage implements OnInit {
   patients: Array<Patient> = [];
-  user: User;
-  userName: string;
-  userEmail: string;
+  isLoading: boolean;
 
   constructor(
     private clientService: ClientService,
     private route: ActivatedRoute,
-    private authService: AuthService
   ) {}
 
   ngOnInit() {
-    // TODO: Buscar os pacientes de forma mais adequada
+    this.isLoading = true;
+
     this.route.queryParams.subscribe(() => {
-      this.userName = localStorage.getItem('userName');
-      this.userEmail = localStorage.getItem('userEmail');
-
-      this.user = this.authService.googleUser;
-
       this.clientService.getClients().subscribe((patients: Array<Patient>) => {
         console.log({patients});
         if(patients) {
@@ -49,6 +42,8 @@ export class ListPatientsPage implements OnInit {
             }
           });
         }
+
+        this.isLoading = false;
       });
     });
   }
