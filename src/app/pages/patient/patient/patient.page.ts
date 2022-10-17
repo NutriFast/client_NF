@@ -22,13 +22,12 @@ export class PatientPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.isLoading = true;
-
     this.route.queryParams.subscribe((queryParams: any) => {
+      this.isLoading = true;
       this.patientId = queryParams.id;
 
       if(this.patientId) {
-        this.clientService.getClient(this.patientId).subscribe((patient: Patient) => {
+        /* this.clientService.getClient(this.patientId).subscribe((patient: Patient) => {
           console.log({patient});
           this.isLoading = false;
 
@@ -37,6 +36,14 @@ export class PatientPage implements OnInit {
           } else {
             this.router.navigateByUrl('/tabs/list');
           }
+        }); */
+
+        this.clientService.getClients().subscribe((patients: Array<Patient>) => {
+          if(patients) {
+            this.patient = patients.find((patient) => patient.id === this.patientId);
+          }
+
+          this.isLoading = false;
         });
       } else {
         this.router.navigateByUrl('/tabs/list');
