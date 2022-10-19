@@ -1,22 +1,74 @@
 <ion-content>
   <div class="container">
-    <span>Passo x de 4</span>
-    <h2>Qual o nome do seu paciente?</h2>
+    <span>Passo {{currentStep.id}} de 4</span>
+    <h2>{{currentStep.title}}</h2>
 
-    <ion-item>
-      <ion-input placeholder="Nome"></ion-input>
-    </ion-item>
+    <form class="formWrapper">
+      <ion-item *ngIf="currentStep.id === 1" class="textInput">
+        <ion-input placeholder="Nome"></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="currentStep.id === 2" lines="none">
+        <ion-datetime-button datetime="date"></ion-datetime-button>
+      </ion-item>
+
+      <ion-item *ngIf="currentStep.id === 3" class="textInput" lines="none">
+        <ion-item>
+          <ion-label position="floating">Peso</ion-label>
+          <ion-input inputmode="numeric" placeholder="(kg)"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Altura</ion-label>
+          <ion-input inputmode="numeric" placeholder="(m)"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Idade</ion-label>
+          <ion-input inputmode="numeric" placeholder="(anos)"></ion-input>
+        </ion-item>
+      </ion-item>
+
+      <ion-item *ngIf="currentStep.id === 4" lines="none">
+        <ion-radio-group>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label>Feminino</ion-label>
+                <ion-radio slot="end" item-left value="fem"></ion-radio>
+              </ion-item>
+            </ion-col>
+
+            <ion-col>
+              <ion-item>
+                <ion-label>Masculino</ion-label>
+                <ion-radio slot="end" item-left value="masc"></ion-radio>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-radio-group>
+      </ion-item>
+    </form>
 
     <div class="buttonWrapper">
-      <ion-button fill="outline">
+      <ion-button [disabled]="checkIsFirstStep()" (click)="previousStep()" fill="outline">
         <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
         Voltar
       </ion-button>
-      <ion-button>
+
+      <ion-button *ngIf="!checkIsLastStep()" (click)="nextStep()">
         Continuar
         <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
       </ion-button>
+
+      <ion-button *ngIf="checkIsLastStep()" (click)="nextStep()">
+        Cadastrar
+        <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+      </ion-button>
     </div>
 
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="date" presentation="date" locale="pt-BR"></ion-datetime>
+      </ng-template>
+    </ion-modal>
   </div>
 </ion-content>
