@@ -21,7 +21,7 @@ const routes: Routes = [
       },
       {
         path: 'new',
-        loadChildren: () => import('../pages/patient/new/new.module').then(m => m.NewPageModule),
+        loadChildren: () => import('../pages/patient/new/new-patient.module').then(m => m.NewPatientPageModule),
         canLoad: [AuthGuard]
       },
       {
