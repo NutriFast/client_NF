@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { User } from '@codetrix-studio/capacitor-google-auth';
-
-import { AuthService } from 'src/app/services/auth/auth.service';
 import { ClientService } from 'src/app/services/client/client.service';
 
 export interface Patient {
-  id: string;
-  userId: string;
-  gender: string | null;
-  birthDate: string | Date | null;
-  name: string | null;
+  id?: string;
+  userId?: string;
+  name: string;
+  birthDate: string;
+  weight: string;
+  height: string;
+  gender: string;
 }
 
 @Component({

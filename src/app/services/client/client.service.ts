@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { AuthService } from '../auth/auth.service';
+/* import { Patient } from 'src/app/pages/patient/list/list-patients.page'; */
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,14 @@ export class ClientService {
     const url = this.baseUrl + '/' + id;
 
     return this.http.get(url, { headers });
+  }
+
+  postClient(client: any) {
+    const accessToken = this.authService.getAccessTokenFromLocalStorage();
+    const headers = new HttpHeaders().set('Authorization', accessToken);
+
+    const url = this.baseUrl;
+
+    return this.http.post(url, client, { headers });
   }
 }

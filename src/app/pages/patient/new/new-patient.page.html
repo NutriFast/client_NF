@@ -3,32 +3,34 @@
     <span>Passo {{currentStep.id}} de 4</span>
     <h2>{{currentStep.title}}</h2>
 
-    <form class="formWrapper">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="formWrapper">
       <ion-item *ngIf="currentStep.id === 1" class="textInput">
-        <ion-input placeholder="Nome"></ion-input>
+        <ion-input type="text" placeholder="Nome" formControlName="name"></ion-input>
       </ion-item>
 
       <ion-item *ngIf="currentStep.id === 2" lines="none">
         <ion-datetime-button datetime="date"></ion-datetime-button>
       </ion-item>
 
+      <ion-modal [keepContentsMounted]="true" lines="none">
+        <ng-template>
+          <ion-datetime id="date" presentation="date" locale="pt-BR" formControlName="birthDate"></ion-datetime>
+        </ng-template>
+      </ion-modal>
+
       <ion-item *ngIf="currentStep.id === 3" class="textInput" lines="none">
         <ion-item>
           <ion-label position="floating">Peso</ion-label>
-          <ion-input inputmode="numeric" placeholder="(kg)"></ion-input>
+          <ion-input inputmode="numeric" placeholder="(kg)" formControlName="weight"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating">Altura</ion-label>
-          <ion-input inputmode="numeric" placeholder="(m)"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Idade</ion-label>
-          <ion-input inputmode="numeric" placeholder="(anos)"></ion-input>
+          <ion-input inputmode="numeric" placeholder="(m)" formControlName="height"></ion-input>
         </ion-item>
       </ion-item>
 
       <ion-item *ngIf="currentStep.id === 4" lines="none">
-        <ion-radio-group>
+        <ion-radio-group formControlName="gender">
           <ion-row>
             <ion-col>
               <ion-item>
@@ -59,16 +61,10 @@
         <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
       </ion-button>
 
-      <ion-button *ngIf="checkIsLastStep()" (click)="nextStep()">
+      <ion-button *ngIf="checkIsLastStep()" type="submit" (click)="submit()">
         Cadastrar
         <ion-icon slot="end" name="checkmark-outline"></ion-icon>
       </ion-button>
     </div>
-
-    <ion-modal [keepContentsMounted]="true">
-      <ng-template>
-        <ion-datetime id="date" presentation="date" locale="pt-BR"></ion-datetime>
-      </ng-template>
-    </ion-modal>
   </div>
 </ion-content>

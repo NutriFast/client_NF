@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-interface Step {
+import { ClientService } from 'src/app/services/client/client.service';
+
+export interface Step {
   id: number;
   title: string;
 }
@@ -12,6 +15,7 @@ interface Step {
   styleUrls: ['./new-patient.page.scss'],
 })
 export class NewPatientPage implements OnInit {
+  form: FormGroup;
   steps: Array<Step> = [
     {
       id: 1,
@@ -36,14 +40,35 @@ export class NewPatientPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-  ) {}
+    private formBuilder: FormBuilder,
+    private clientService: ClientService,
+  ) {
+    this.form = this.formBuilder.group({
+      name: new FormControl(),
+      weight: new FormControl(),
+      height: new FormControl(),
+      gender: new FormControl(),
+      birthDate: new FormControl()
+    });
+  }
 
   ngOnInit() {
+    console.log(this.form);
     this.route.queryParams.subscribe(() => {
+      this.form.reset({});
+
       this.firstStep = this.setFirstStep();
       this.lastStep = this.setLastStep();
 
       this.currentStep = this.firstStep;
+    });
+  }
+
+  submit() {
+    console.log(this.form.value);
+
+    this.clientService.postClient(this.form.value).subscribe(createdClient => {
+      console.log(createdClient);
     });
   }
 
