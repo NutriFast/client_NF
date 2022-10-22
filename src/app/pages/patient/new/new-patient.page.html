@@ -35,14 +35,14 @@
             <ion-col>
               <ion-item>
                 <ion-label>Feminino</ion-label>
-                <ion-radio slot="end" item-left value="fem"></ion-radio>
+                <ion-radio slot="end" item-left value="Feminino"></ion-radio>
               </ion-item>
             </ion-col>
 
             <ion-col>
               <ion-item>
                 <ion-label>Masculino</ion-label>
-                <ion-radio slot="end" item-left value="masc"></ion-radio>
+                <ion-radio slot="end" item-left value="Masculino"></ion-radio>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -61,9 +61,10 @@
         <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
       </ion-button>
 
-      <ion-button *ngIf="checkIsLastStep()" type="submit" (click)="submit()">
+      <ion-button *ngIf="checkIsLastStep()" (click)="showConfirmAlert()" [disabled]="isLoading">
         Cadastrar
-        <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+        <ion-icon slot="end" *ngIf="isLoading === false" name="checkmark-outline"></ion-icon>
+        <ion-spinner slot="end" *ngIf="isLoading === true" name="bubbles" color="#ffffff;" style="margin-left: 5px;"></ion-spinner>
       </ion-button>
     </div>
   </div>

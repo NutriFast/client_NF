@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { AlertController } from '@ionic/angular';
 
 import { ClientService } from 'src/app/services/client/client.service';
 
@@ -15,6 +17,8 @@ export interface Step {
   styleUrls: ['./new-patient.page.scss'],
 })
 export class NewPatientPage implements OnInit {
+  isLoading = false;
+
   form: FormGroup;
   steps: Array<Step> = [
     {
@@ -38,10 +42,15 @@ export class NewPatientPage implements OnInit {
   firstStep: Step;
   lastStep: Step;
 
+  handlerMessage = '';
+  roleMessage = '';
+
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private clientService: ClientService,
+    private alertController: AlertController
   ) {
     this.form = this.formBuilder.group({
       name: new FormControl(),
@@ -53,7 +62,6 @@ export class NewPatientPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.form);
     this.route.queryParams.subscribe(() => {
       this.form.reset({});
 
@@ -66,10 +74,59 @@ export class NewPatientPage implements OnInit {
 
   submit() {
     console.log(this.form.value);
+    this.isLoading = true;
 
     this.clientService.postClient(this.form.value).subscribe(createdClient => {
       console.log(createdClient);
+      if(createdClient) {
+        this.showCreatedAlert();
+        this.router.navigateByUrl('/tabs/list');
+      }
+
+      this.isLoading = false;
     });
+  }
+
+  async showCreatedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Paciente criado com sucesso!',
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'cancel',
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async showConfirmAlert() {
+    const formatedBirthDate = new Date(this.form.value.birthDate).toLocaleDateString();
+
+    const alert = await this.alertController.create({
+      header: 'Revise antes de enviar!',
+      buttons: [
+        {
+          text: 'Voltar',
+          role: 'cancel',
+        },
+        {
+          text: 'Enviar',
+          role: 'confirm',
+          handler: () => {
+            this.submit();
+          },
+        },
+      ],
+      message: `Nome: ${this.form.value.name},
+                Data de Nascimento: ${formatedBirthDate},
+                Peso: ${this.form.value.weight} kg,
+                Altura: ${this.form.value.height} m,
+                Gênero: ${this.form.value.gender}`,
+    });
+
+    await alert.present();
   }
 
   setFirstStep() {
