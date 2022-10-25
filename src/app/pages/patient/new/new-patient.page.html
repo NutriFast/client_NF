@@ -3,7 +3,7 @@
     <span>Passo {{currentStep.id}} de 4</span>
     <h2>{{currentStep.title}}</h2>
 
-    <form [formGroup]="form" (ngSubmit)="submit()" class="formWrapper">
+    <form [formGroup]="form" class="formWrapper">
       <ion-item *ngIf="currentStep.id === 1" class="textInput">
         <ion-input type="text" placeholder="Nome" formControlName="name"></ion-input>
       </ion-item>

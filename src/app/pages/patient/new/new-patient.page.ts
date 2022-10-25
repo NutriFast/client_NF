@@ -72,6 +72,38 @@ export class NewPatientPage implements OnInit {
     });
   }
 
+  async showConfirmAlert() {
+    const formatedBirthDate = new Date(this.form.value.birthDate).toLocaleDateString();
+    const name = this.form.value.name;
+    const weight = this.form.value.weight;
+    const height = this.form.value.height;
+    const gender = this.form.value.gender;
+
+    const alert = await this.alertController.create({
+      header: 'Revise antes de enviar!',
+      buttons: [
+        {
+          text: 'Voltar',
+          role: 'cancel',
+        },
+        {
+          text: 'Enviar',
+          role: 'confirm',
+          handler: () => {
+            this.submit();
+          },
+        },
+      ],
+      message: `Nome: ${name ? name : 'vazio!'},
+                Data de Nascimento: ${formatedBirthDate},
+                Peso: ${weight ? weight + ' kg' : 'vazio!'},
+                Altura: ${height ? height + ' m' : 'vazio!'},
+                Gênero: ${gender ? gender : 'vazio!'}`,
+    });
+
+    await alert.present();
+  }
+
   submit() {
     console.log(this.form.value);
     this.isLoading = true;
@@ -96,34 +128,6 @@ export class NewPatientPage implements OnInit {
           role: 'cancel',
         },
       ],
-    });
-
-    await alert.present();
-  }
-
-  async showConfirmAlert() {
-    const formatedBirthDate = new Date(this.form.value.birthDate).toLocaleDateString();
-
-    const alert = await this.alertController.create({
-      header: 'Revise antes de enviar!',
-      buttons: [
-        {
-          text: 'Voltar',
-          role: 'cancel',
-        },
-        {
-          text: 'Enviar',
-          role: 'confirm',
-          handler: () => {
-            this.submit();
-          },
-        },
-      ],
-      message: `Nome: ${this.form.value.name},
-                Data de Nascimento: ${formatedBirthDate},
-                Peso: ${this.form.value.weight} kg,
-                Altura: ${this.form.value.height} m,
-                Gênero: ${this.form.value.gender}`,
     });
 
     await alert.present();
