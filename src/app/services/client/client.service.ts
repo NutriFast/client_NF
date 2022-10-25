@@ -42,4 +42,13 @@ export class ClientService {
 
     return this.http.post(url, client, { headers });
   }
+
+  updateClient(client: any) {
+    const accessToken = this.authService.getAccessTokenFromLocalStorage();
+    const headers = new HttpHeaders().set('Authorization', accessToken);
+
+    const url = this.baseUrl;
+
+    return this.http.put(url, client, { headers });
+  }
 }
