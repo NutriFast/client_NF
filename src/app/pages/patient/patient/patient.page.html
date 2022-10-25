@@ -1,6 +1,11 @@
 <ion-content>
-  <div class="container">
+  <form [formGroup]="form" class="container">
     <div class="avatar-wrapper">
+      <ion-button *ngIf="isLoading === false" size="small" shape="round" class="edit-button" (click)="setIsEditing()">
+        <ion-icon *ngIf="isEditing === false" slot="icon-only" name="create-outline"></ion-icon>
+        <ion-icon *ngIf="isEditing === true" slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+
       <ion-avatar>
         <img src="https://ionicframework.com/docs/img/demos/avatar.svg">
       </ion-avatar>
@@ -9,8 +14,13 @@
         <ion-spinner name="dots" color="primary"></ion-spinner>
       </div>
       <div *ngIf="isLoading === false">
-        <h3>{{patient.name}}</h3>
-        {{patient.telephone}}
+        <h3 *ngIf="isEditing === false">{{patient.name}}</h3>
+
+        <ion-item *ngIf="isEditing === true">
+          <ion-input placeholder="Nome" formControlName="name"></ion-input>
+        </ion-item>
+
+        <!-- {{patient.telephone}} -->
       </div>
     </div>
 
@@ -33,11 +43,11 @@
       </ion-row>
     </ion-grid>
 
-    <ion-grid *ngIf="isLoading === false">
+    <ion-grid *ngIf="isLoading === false && isEditing === false">
       <ion-row>
         <ion-col>
           <b>Idade</b>
-          <span>{{patient.age}} anos</span>
+          <span><!-- {{patient.age}} --> anos</span>
         </ion-col>
         <ion-col class="left-col">
           <b>Peso</b>
@@ -47,7 +57,7 @@
       <ion-row>
         <ion-col>
           <b>Altura</b>
-          <span>{{patient.height}}</span>
+          <span>{{patient.height}} m</span>
         </ion-col>
         <ion-col class="left-col">
           <b>Sexo</b>
@@ -56,12 +66,73 @@
       </ion-row>
     </ion-grid>
 
-    <div class="calc-wrapper" *ngIf="isLoading === false">
+    <ion-grid *ngIf="isLoading === false && isEditing === true">
+      <ion-row>
+        <ion-col>
+          <b>Data de Nascimento</b>
+          <ion-item lines="none">
+            <ion-datetime-button datetime="date"></ion-datetime-button>
+          </ion-item>
+
+          <ion-modal [keepContentsMounted]="true" lines="none">
+            <ng-template>
+              <ion-datetime id="date" presentation="date" locale="pt-BR" formControlName="birthDate"></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <b>Peso</b>
+          <ion-item>
+            <ion-input inputmode="numeric" placeholder="(kg)" formControlName="weight"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <b>Altura</b>
+          <ion-item>
+            <ion-input inputmode="numeric" placeholder="(m)" formControlName="height"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <b>Sexo</b>
+          <ion-item lines="none">
+            <ion-radio-group formControlName="gender">
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Feminino</ion-label>
+                    <ion-radio slot="end" item-left value="Feminino"></ion-radio>
+                  </ion-item>
+                </ion-col>
+
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Masculino</ion-label>
+                    <ion-radio slot="end" item-left value="Masculino"></ion-radio>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-radio-group>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div *ngIf="isLoading === false && isEditing === false" class="calc-wrapper">
       <div class="calc-info">
         <span>Último gasto energético calculado</span>
-        <h2>{{patient.kcal}} Kcal</h2>
+        <h2><!-- {{patient.kcal}} --> Kcal</h2>
       </div>
       <ion-button shape="round">Calcular</ion-button>
     </div>
-  </div>
+
+    <div *ngIf="isLoading === false && isEditing === true" (click)="showConfirmAlert()" class="confirm-edit-wrapper" >
+      <ion-button  shape="round">Editar</ion-button>
+    </div>
+  </form>
 </ion-content>

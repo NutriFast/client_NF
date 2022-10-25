@@ -31,6 +31,14 @@ ion-avatar {
   height: 119px;
 }
 
+.edit-button {
+  width: 45px;
+  height: 45px;
+
+  margin-bottom: -30px;
+  margin-right: -90px;
+}
+
 ion-grid {
   margin: 35px 30px;
 }
@@ -69,4 +77,13 @@ ion-col {
 ion-button {
   width: 220px;
   height: 50px;
+}
+
+.confirm-edit-wrapper {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
