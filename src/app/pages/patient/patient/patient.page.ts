@@ -117,13 +117,17 @@ export class PatientPage implements OnInit {
 
   submit() {
     console.log(this.form.value);
-    /* this.isLoading = true;
+    this.isLoading = true;
 
     const client = {
       id: this.patient.id,
-      userId: this.patient.userId,
-      ...this.form.value,
+      userId: this.form.value.name,
+      name: this.patient.userId, // Invertido por causa de bug no back
+      birthDate: this.form.value.birthDate,
+      gender: this.form.value.gender
     };
+
+    console.log(client);
 
     this.clientService.updateClient(client).subscribe(createdClient => {
       console.log(createdClient);
@@ -133,9 +137,7 @@ export class PatientPage implements OnInit {
       }
 
       this.isLoading = false;
-    }); */
-
-    this.showTemporaryAlert();
+    });
   }
 
   async showCreatedAlert() {
@@ -148,22 +150,6 @@ export class PatientPage implements OnInit {
         },
       ],
     });
-
-    await alert.present();
-  }
-
-  async showTemporaryAlert() {
-    const alert = await this.alertController.create({
-      header: 'A edição não disponível no momento!',
-      buttons: [
-        {
-          text: 'Ok',
-          role: 'cancel',
-        },
-      ],
-    });
-
-    this.isEditing = false;
 
     await alert.present();
   }

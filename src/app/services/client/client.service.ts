@@ -47,8 +47,10 @@ export class ClientService {
     const accessToken = this.authService.getAccessTokenFromLocalStorage();
     const headers = new HttpHeaders().set('Authorization', accessToken);
 
+    console.log({client});
+
     const url = this.baseUrl;
 
-    return this.http.put(url, client, { headers });
+    return this.http.patch(url, client, { headers });
   }
 }
