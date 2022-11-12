@@ -1,0 +1,29 @@
+<ion-content>
+  <!-- [formGroup]="form"  -->
+  <form class="container">
+    <ion-avatar>
+      <img src="https://ionicframework.com/docs/img/demos/avatar.svg">
+    </ion-avatar>
+
+    <h3>Renato Augusto Lopes</h3>
+
+    <h1>Atividades Realizadas</h1>
+
+    <ion-grid *ngFor="let activity of mockedActivities; let colIndex=index">
+      <app-activity-card
+        [activity]="activity"
+        [isEdit]="false"
+        [routerLink]="[activityPath]"
+      ></app-activity-card>
+    </ion-grid>
+
+    <ion-button class="add-activity-button" [routerLink]="[selectActivityPath]">
+      <ion-icon slot="start" name="add-outline"></ion-icon>
+      Nova atividade
+    </ion-button>
+
+    <ion-button class="calc-button" shape="round" [routerLink]="[resultPath]">
+      Calcular
+    </ion-button>
+  </form>
+</ion-content>
