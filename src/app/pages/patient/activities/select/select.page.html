@@ -1,0 +1,12 @@
+<ion-content>
+  <form class="container">
+    <h1>Selecione a Atividade</h1>
+
+    <ion-searchbar showCancelButton="focus"></ion-searchbar>
+
+    <ion-grid *ngFor="let activity of mockedActivities; let colIndex=index">
+      <app-activity-card [activity]="activity" [isEdit]="true"></app-activity-card>
+    </ion-grid>
+
+  </form>
+</ion-content>
