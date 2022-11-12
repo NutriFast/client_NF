@@ -1,0 +1,14 @@
+<ion-card>
+  <ion-card-content>
+    <div class="title-wrapper">
+      <ion-button>
+        <ion-icon slot="icon-only" name="{{activity.icon}}" color="dark"></ion-icon>
+      </ion-button>
+      <span>{{activity.name}}</span>
+    </div>
+    <div *ngIf="isEdit === false" class="info-wrapper">
+      <b>{{activity.daysPerWeek}}/SEMANA</b>
+      <b>{{activity.hoursPerDay}}H</b>
+    </div>
+  </ion-card-content>
+</ion-card>
