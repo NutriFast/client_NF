@@ -35,6 +35,25 @@ const routes: Routes = [
         canLoad: [AuthGuard]
       },
       {
+        path: 'activities',
+        loadChildren: () => import('../pages/patient/activities/list/list-activities.module').then( m => m.ListActivitiesPageModule),
+        canLoad: [AuthGuard]
+      },
+      {
+        path: 'activity',
+        loadChildren: () => import('../pages/patient/activities/activity/activity.module').then( m => m.ActivityPageModule),
+        canLoad: [AuthGuard]
+      },
+      {
+        path: 'result',
+        loadChildren: () => import('../pages/patient/activities/result/result.module').then( m => m.ResultPageModule),
+        canLoad: [AuthGuard]
+      },
+      {
+        path: 'select',
+        loadChildren: () => import('../pages/patient/activities/select/select.module').then( m => m.SelectPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/list',
         pathMatch: 'full',
