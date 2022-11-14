@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 export interface Activity {
-  icon: string;
+  id?: string;
+  icon?: string;
   name: string;
-  daysPerWeek: number;
-  hoursPerDay: number;
+  daysPerWeek?: number;
+  hoursPerDay?: number;
+  value?: number;
 }
 
 @Component({
