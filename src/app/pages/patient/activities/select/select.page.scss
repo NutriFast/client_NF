@@ -11,3 +11,18 @@
     color: #2C9142;
   }
 }
+
+.button-wrapper {
+  margin-top: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-button {
+  width: 220px;
+  height: 50px;
+
+  margin-top: 55px;
+}

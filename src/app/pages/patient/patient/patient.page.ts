@@ -21,6 +21,8 @@ export class PatientPage implements OnInit {
 
   form: FormGroup;
 
+  activitiesPath = '/tabs/activities';
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,

@@ -8,5 +8,16 @@
       <app-activity-card [activity]="activity" [isEdit]="true"></app-activity-card>
     </ion-grid>
 
+    <div class="button-wrapper">
+      <ion-button
+        class="back-button"
+        fill="outline"
+        shape="round"
+        [routerLink]="[activitiesPath]"
+        [queryParams]="{ id: patientId, name: patientName }"
+      >
+        Voltar
+      </ion-button>
+    </div>
   </form>
 </ion-content>

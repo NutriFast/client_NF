@@ -4,11 +4,17 @@
     <ion-avatar>
       <img src="https://ionicframework.com/docs/img/demos/avatar.svg">
     </ion-avatar>
-    <h3>Renato Augusto Lopes</h3>
+    <h3>{{patientName}}</h3>
 
     <h2>é de <b><u>{{result}}</u> Kcal</b></h2>
 
-    <ion-button class="back-button" shape="round" [routerLink]="[path]">
+    <ion-button
+      class="back-button"
+      shape="round"
+      fill="outline"
+      [routerLink]="[path]"
+      [queryParams]="{ id: patientId, name: patientName }"
+    >
       Voltar
     </ion-button>
   </div>

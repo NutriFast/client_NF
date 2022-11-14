@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-result',
@@ -8,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 export class ResultPage implements OnInit {
   result = 2000;
   path = '/tabs/activities';
-  constructor() { }
+
+  patientId: string;
+  patientName: string;
+
+  constructor(
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe((queryParams: any) => {
+      this.patientId = queryParams.id;
+      this.patientName = queryParams.name;
+    });
   }
-
 }

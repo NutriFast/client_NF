@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 export interface Activity {
   icon: string;
@@ -21,11 +22,24 @@ export class ListActivitiesPage implements OnInit {
   ];
   resultPath = '/tabs/result';
   activityPath = '/tabs/activity';
+  patientPath = '/tabs/patient';
   selectActivityPath = '/tabs/select';
 
-  constructor() { }
+  patientId: string;
+  patientName: string;
+
+  constructor(
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe((queryParams: any) => {
+      this.patientId = queryParams.id;
+      this.patientName = queryParams.name;
+    });
   }
 
+  stringifyActivity(activity: Activity) {
+    return btoa(JSON.stringify(activity));
+  }
 }

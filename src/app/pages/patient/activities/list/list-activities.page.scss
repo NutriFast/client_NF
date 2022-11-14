@@ -8,7 +8,7 @@
   > h3 {
     font-family: 'Montserrat';
     font-weight: 400;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 15px;
 
     margin-top: 10px;
@@ -22,8 +22,8 @@
 
     color: #2C9042;
 
-    margin-top: 30px;
-    margin-bottom: 25px;
+    margin-top: 15px;
+    margin-bottom: 20px;
   }
 }
 
@@ -37,6 +37,16 @@
   --color: #2C9042;
 
   margin-top: 0;
+}
+
+.button-wrapper {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 20px;
 }
 
 .calc-button {

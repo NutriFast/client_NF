@@ -5,23 +5,29 @@
       <img src="https://ionicframework.com/docs/img/demos/avatar.svg">
     </ion-avatar>
 
-    <h3>Renato Augusto Lopes</h3>
+    <h3>{{patientName}}</h3>
 
-    <app-activity-card [activity]="mockedActivity" [isEdit]="true"></app-activity-card>
+    <app-activity-card [activity]="activity" [isEdit]="true"></app-activity-card>
 
     <ion-item>
-      <ion-input value="{{mockedActivity.daysPerWeek}}"></ion-input>
+      <ion-input value="{{activity.daysPerWeek}}"></ion-input>
       <ion-label>Dias / Semana</ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-input value="{{mockedActivity.hoursPerDay}}"></ion-input>
+      <ion-input value="{{activity.hoursPerDay}}"></ion-input>
       <ion-label>Horas / Dia</ion-label>
     </ion-item>
 
     <a class="delete-link">Excluir essa atividade para esse paciente</a>
 
-    <ion-button class="back-button" shape="round" [routerLink]="[path]">
+    <ion-button
+      class="back-button"
+      shape="round"
+      fill="outline"
+      [routerLink]="[activitiesPath]"
+      [queryParams]="{ id: patientId, name: patientName }"
+    >
       Voltar
     </ion-button>
   </form>

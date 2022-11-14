@@ -128,7 +128,13 @@
         <span>Último gasto energético calculado</span>
         <h2><!-- {{patient.kcal}} --> Kcal</h2>
       </div>
-      <ion-button shape="round">Calcular</ion-button>
+      <ion-button
+        shape="round"
+        [routerLink]="[activitiesPath]"
+        [queryParams]="{ id: patient.id, name: patient.name }"
+      >
+        Calcular
+      </ion-button>
     </div>
 
     <div *ngIf="isLoading === false && isEditing === true" (click)="showConfirmAlert()" class="confirm-edit-wrapper" >
