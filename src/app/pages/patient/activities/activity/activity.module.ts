@@ -8,15 +8,16 @@ import { ActivityPageRoutingModule } from './activity-routing.module';
 
 import { ActivityPage } from './activity.page';
 
-import { ActivityCardComponent } from 'src/app/components/activity-card/activity-card.component';
+import { ActivityCardModule } from 'src/app/components/activity-card/activity-card.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    ActivityCardModule,
     ActivityPageRoutingModule
   ],
-  declarations: [ActivityPage, ActivityCardComponent]
+  declarations: [ActivityPage]
 })
 export class ActivityPageModule {}

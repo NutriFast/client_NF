@@ -8,15 +8,16 @@ import { SelectPageRoutingModule } from './select-routing.module';
 
 import { SelectPage } from './select.page';
 
-import { ActivityCardComponent } from 'src/app/components/activity-card/activity-card.component';
+import { ActivityCardModule } from 'src/app/components/activity-card/activity-card.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    ActivityCardModule,
     SelectPageRoutingModule
   ],
-  declarations: [SelectPage, ActivityCardComponent]
+  declarations: [SelectPage]
 })
 export class SelectPageModule {}
