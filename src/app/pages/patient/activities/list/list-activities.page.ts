@@ -30,6 +30,13 @@ export class ListActivitiesPage implements OnInit {
   patientId: string;
   patientName: string;
 
+  // Dar um get no schedule
+  // Ver se existe algum
+  // Se nao existir cria
+  // Se existir da o get no activitySchedule
+  // Se nao existir cria
+  // Dar get nas atividades
+
   constructor(
     private route: ActivatedRoute,
   ) { }
