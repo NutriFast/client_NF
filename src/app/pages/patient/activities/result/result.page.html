@@ -1,12 +1,17 @@
 <ion-content>
   <div class="container">
-    <h1>O gasto energético de</h1>
+    <!-- <h1>O gasto energético de</h1> -->
+    <h1>Resultados de </h1>
     <ion-avatar>
       <img src="https://ionicframework.com/docs/img/demos/avatar.svg">
     </ion-avatar>
     <h3>{{patientName}}</h3>
 
-    <h2>é de <b><u>{{result}}</u> Kcal</b></h2>
+    <!-- <h2>é de <b><u>{{result}}</u> Kcal</b></h2> -->
+    <h2>FAF <b><u>{{activitiesSchedule.FAF}}</u> und</b></h2>
+    <h2>TPR <b><u>{{activitiesSchedule.TPR}}</u> und</b></h2>
+    <h2>sumDB <b><u>{{activitiesSchedule.sumDB}}</u> und</b></h2>
+    <h2>sumPT <b><u>{{activitiesSchedule.sumPT}}</u> und</b></h2>
 
     <ion-button
       class="back-button"

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Activity } from '../list/list-activities.page';
+import { ActivityDetail } from '../list/list-activities.page';
 
 @Component({
   selector: 'app-activity',
@@ -8,20 +8,24 @@ import { Activity } from '../list/list-activities.page';
   styleUrls: ['./activity.page.scss'],
 })
 export class ActivityPage implements OnInit {
-  activity: Activity;
   patientId: string;
   patientName: string;
+  isEdit: boolean;
+  activity: ActivityDetail;
 
   activitiesPath = '/tabs/activities';
+  selectActivityPath = '/tabs/select';
 
   constructor(
     private route: ActivatedRoute,
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((queryParams: any) => {
       this.patientId = queryParams.id;
       this.patientName = queryParams.name;
+
+      this.isEdit = queryParams.isEdit;
 
       this.activity = JSON.parse(atob(queryParams.activity));
     });

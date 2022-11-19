@@ -8,17 +8,30 @@
 
     <h1>Atividades Realizadas</h1>
 
-    <ion-grid *ngFor="let activity of mockedActivities; let colIndex=index">
-      <app-activity-card
-        [activity]="activity"
-        [isEdit]="false"
-        [routerLink]="[activityPath]"
-        [queryParams]="{ id: patientId, name: patientName, activity: stringifyActivity(activity) }"
-      ></app-activity-card>
-    </ion-grid>
+    <ion-row *ngIf="isLoading === true" class="statusRow">
+      <ion-spinner name="bubbles" color="primary"></ion-spinner>
+    </ion-row>
+
+    <div *ngIf="isLoading === false">
+      <ion-grid *ngFor="let activity of patientActivitiesResult; let colIndex=index">
+        <app-activity-card
+          [activity]="activity"
+          [isEdit]="true"
+          [routerLink]="[activityPath]"
+          [queryParams]="{ id: patientId, name: patientName, isEdit: true, activity: stringifyActivityDetail(activity) }"
+        ></app-activity-card>
+      </ion-grid>
+
+      <ion-row *ngIf="patientActivitiesResult.length === 0" class="statusRow">
+        <ion-text>
+          Nenhuma atividade registrada para o paciente
+        </ion-text>
+      </ion-row>
+    </div>
 
     <ion-button
       class="add-activity-button"
+      [disabled]="isLoading"
       [routerLink]="[selectActivityPath]"
       [queryParams]="{ id: patientId, name: patientName }"
     >
@@ -39,8 +52,9 @@
       <ion-button
         class="calc-button"
         shape="round"
+        [disabled]="isLoading"
         [routerLink]="[resultPath]"
-        [queryParams]="{ id: patientId, name: patientName }"
+        [queryParams]="{ id: patientId, name: patientName, schedule: stringifyActivitySchedule(patientActivitiesSchedule) }"
       >
         Calcular
       </ion-button>

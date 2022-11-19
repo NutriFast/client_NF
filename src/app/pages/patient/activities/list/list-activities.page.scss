@@ -55,3 +55,19 @@
 
   margin-top: 30px;
 }
+
+.statusRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 25px;
+
+  > ion-spinner {
+    transform: scale(1.5);
+  }
+
+  > ion-text {
+    opacity: 0.4;
+  }
+}

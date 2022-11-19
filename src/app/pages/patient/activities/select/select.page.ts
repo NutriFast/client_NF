@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ActivityService } from 'src/app/services/activity/activity.service';
-import { Activity } from '../list/list-activities.page';
+import { ActivityDetail } from '../list/list-activities.page';
 
 @Component({
   selector: 'app-select',
@@ -9,10 +9,11 @@ import { Activity } from '../list/list-activities.page';
   styleUrls: ['./select.page.scss'],
 })
 export class SelectPage implements OnInit {
-  activities: Array<Activity> = [];
+  activities: Array<ActivityDetail> = [];
   isLoading: boolean;
 
   activitiesPath = '/tabs/activities';
+  activityPath = '/tabs/activity';
 
   patientId: string;
   patientName: string;
@@ -20,7 +21,7 @@ export class SelectPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private activityService: ActivityService,
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.isLoading = true;
@@ -29,7 +30,7 @@ export class SelectPage implements OnInit {
       this.patientId = queryParams.id;
       this.patientName = queryParams.name;
 
-      this.activityService.getActivities().subscribe((activities: Array<Activity>) => {
+      this.activityService.getActivities().subscribe((activities: Array<ActivityDetail>) => {
         console.log({activities});
         if(activities) {
           activities.map((activity) => {
@@ -42,6 +43,10 @@ export class SelectPage implements OnInit {
         this.isLoading = false;
       });
     });
+  }
+
+  stringifyActivityDetail(activityDetail: ActivityDetail) {
+    return btoa(JSON.stringify(activityDetail));
   }
 
   setIconByActivity(name: string) {

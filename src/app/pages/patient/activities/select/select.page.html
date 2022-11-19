@@ -10,7 +10,12 @@
 
     <div *ngIf="isLoading === false">
       <ion-grid *ngFor="let activity of activities; let colIndex=index">
-        <app-activity-card [activity]="activity" [isEdit]="true"></app-activity-card>
+        <app-activity-card
+          [activity]="activity"
+          [isEdit]="false"
+          [routerLink]="[activityPath]"
+          [queryParams]="{ id: patientId, name: patientName, activity: stringifyActivityDetail(activity) }"
+        ></app-activity-card>
       </ion-grid>
 
       <ion-row *ngIf="activities.length === 0" class="statusRow">

@@ -1,14 +1,24 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { AuthService } from '../auth/auth.service';
 
-interface ActivitySchedule {
+export interface ActivityResult {
+  id: string;
   duration: number;
   freequency: number; // Errado pq ta errado no backend
-  activityId: string;
   scheduleId: string;
-
+  activityId: string;
+  dailyBase: number;
+  parcialTime: number;
+}
+export interface ActivitySchedule {
+	result: Array<ActivityResult>;
+	sumDB: number;
+	sumPT: number;
+	TPR: number;
+	FAF: number;
 }
 
 @Injectable({

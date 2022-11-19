@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Activity } from 'src/app/pages/patient/activities/list/list-activities.page';
+import { ActivityDetail } from 'src/app/pages/patient/activities/list/list-activities.page';
 
 @Component({
   selector: 'app-activity-card',
@@ -8,7 +8,7 @@ import { Activity } from 'src/app/pages/patient/activities/list/list-activities.
   styleUrls: ['./activity-card.component.scss'],
 })
 export class ActivityCardComponent implements OnInit {
-  @Input() activity: Activity;
+  @Input() activity: ActivityDetail;
   @Input() isEdit: boolean;
 
   constructor() { }

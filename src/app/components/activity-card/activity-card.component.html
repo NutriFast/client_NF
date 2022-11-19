@@ -6,9 +6,9 @@
       </ion-button>
       <span>{{activity.name}}</span>
     </div>
-    <div *ngIf="isEdit === false" class="info-wrapper">
-      <b>{{activity.daysPerWeek}}/SEMANA</b>
-      <b>{{activity.hoursPerDay}}H</b>
+    <div *ngIf="isEdit" class="info-wrapper">
+      <b>{{activity.freequency}}/SEMANA</b>
+      <b>{{activity.duration}}H</b>
     </div>
   </ion-card-content>
 </ion-card>
