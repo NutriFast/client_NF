@@ -124,6 +124,10 @@ export class ListActivitiesPage implements OnInit {
     return btoa(JSON.stringify(activitySchedule));
   }
 
+  stringifySchedule(clientSchedule: ClientSchedule) {
+    return btoa(JSON.stringify(clientSchedule));
+  }
+
   setActivitiesResult(activitySchedule: ActivitySchedule): Array<ActivityDetail> {
     const patientActivitiesResult = activitySchedule.result.map(activityResult => {
       const relatedActivity = this.activities.find(activity => activity.id === activityResult.activityId);

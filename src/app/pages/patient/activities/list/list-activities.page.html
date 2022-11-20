@@ -33,7 +33,7 @@
       class="add-activity-button"
       [disabled]="isLoading"
       [routerLink]="[selectActivityPath]"
-      [queryParams]="{ id: patientId, name: patientName }"
+      [queryParams]="{ id: patientId, name: patientName, scheduleId: selectedSchedule.id }"
     >
       <ion-icon slot="start" name="add-outline"></ion-icon>
       Nova atividade

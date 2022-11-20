@@ -14,7 +14,7 @@
           [activity]="activity"
           [isEdit]="false"
           [routerLink]="[activityPath]"
-          [queryParams]="{ id: patientId, name: patientName, activity: stringifyActivityDetail(activity) }"
+          [queryParams]="{ id: patientId, name: patientName, activity: stringifyActivityDetail(activity), scheduleId: scheduleId }"
         ></app-activity-card>
       </ion-grid>
 

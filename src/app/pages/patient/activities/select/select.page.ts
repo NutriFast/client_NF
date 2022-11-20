@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ActivityService } from 'src/app/services/activity/activity.service';
-import { ActivityDetail } from '../list/list-activities.page';
+import { ActivitySchedule } from 'src/app/services/activitySchedule/activity-schedule.service';
+import { ActivityDetail, ClientSchedule } from '../list/list-activities.page';
 
 @Component({
   selector: 'app-select',
@@ -10,6 +11,7 @@ import { ActivityDetail } from '../list/list-activities.page';
 })
 export class SelectPage implements OnInit {
   activities: Array<ActivityDetail> = [];
+  scheduleId: string;
   isLoading: boolean;
 
   activitiesPath = '/tabs/activities';
@@ -29,6 +31,7 @@ export class SelectPage implements OnInit {
     this.route.queryParams.subscribe((queryParams: any) => {
       this.patientId = queryParams.id;
       this.patientName = queryParams.name;
+      this.scheduleId = queryParams.scheduleId;
 
       this.activityService.getActivities().subscribe((activities: Array<ActivityDetail>) => {
         console.log({activities});
@@ -47,6 +50,10 @@ export class SelectPage implements OnInit {
 
   stringifyActivityDetail(activityDetail: ActivityDetail) {
     return btoa(JSON.stringify(activityDetail));
+  }
+
+  stringifySchedule(clientSchedule: ClientSchedule) {
+    return btoa(JSON.stringify(clientSchedule));
   }
 
   setIconByActivity(name: string) {
