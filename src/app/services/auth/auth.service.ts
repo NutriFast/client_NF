@@ -35,6 +35,10 @@ export class AuthService {
     );
   }
 
+  getAccessTokenBackdoor() {
+    return this.http.get('https://macro-key-346005.web.app/auth/backdoor');
+  }
+
   setLocalStorageToken(accessToken: string) {
     localStorage.setItem('accessToken', accessToken);
   }

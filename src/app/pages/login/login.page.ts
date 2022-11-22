@@ -49,10 +49,25 @@ export class LoginPage implements OnInit {
     if(this.authService.googleAccessToken) {
       this.getAccessToken();
     }
+
+    /* this.getAccessTokenBackdoor(); */
   }
 
   getAccessToken() {
     this.authService.getAccessToken()
+      .subscribe((response: AuthResponse) => {
+        const accessToken = response.accessToken;
+        console.log({accessToken});
+
+        if(accessToken) {
+          this.logIn(accessToken);
+        }
+      }
+    );
+  }
+
+  getAccessTokenBackdoor() {
+    this.authService.getAccessTokenBackdoor()
       .subscribe((response: AuthResponse) => {
         const accessToken = response.accessToken;
         console.log({accessToken});
