@@ -9,16 +9,23 @@ import { Patient } from 'src/app/pages/patient/list/list-patients.page';
 })
 export class CardComponent implements OnInit {
   @Input() patient: Patient;
+  age: number;
 
   path = '/tabs/patient';
-  name: string;
-  gender: string;
-  age: string | number;
-  kcal: string | number;
   imgUrl = 'https://ionicframework.com/docs/img/demos/avatar.svg';
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
+    this.age = this.getAgeByBirthDate(this.patient.birthDate);
+  }
+
+  getAgeByBirthDate(birthDate: string) {
+    const todaysDate = new Date();
+    const convertedBirthDate = new Date(birthDate);
+
+    const age = todaysDate.getFullYear() - convertedBirthDate.getFullYear();
+
+    return age;
   }
 }

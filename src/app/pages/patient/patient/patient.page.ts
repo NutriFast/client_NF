@@ -16,6 +16,8 @@ import { Patient } from '../list/list-patients.page';
 export class PatientPage implements OnInit {
   patient: Patient;
   patientId: string;
+  patientAge: number;
+
   isLoading: boolean;
   isEditing: boolean;
 
@@ -72,6 +74,8 @@ export class PatientPage implements OnInit {
               birthDate: this.patient.birthDate
             });
           }
+
+          this.patientAge = this.getAgeByBirthDate(this.patient.birthDate);
 
           this.isLoading = false;
         });
@@ -154,5 +158,14 @@ export class PatientPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  getAgeByBirthDate(birthDate: string) {
+    const todaysDate = new Date();
+    const convertedBirthDate = new Date(birthDate);
+
+    const age = todaysDate.getFullYear() - convertedBirthDate.getFullYear();
+
+    return age;
   }
 }
