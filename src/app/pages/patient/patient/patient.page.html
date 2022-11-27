@@ -10,7 +10,7 @@
         <img src="https://ionicframework.com/docs/img/demos/avatar.svg">
       </ion-avatar>
 
-      <div *ngIf="isLoading === true" class="loading">
+      <div *ngIf="isLoading === true">
         <ion-spinner name="dots" color="primary"></ion-spinner>
       </div>
       <div *ngIf="isLoading === false">
@@ -124,21 +124,22 @@
     </ion-grid>
 
     <div *ngIf="isLoading === false && isEditing === false" class="calc-wrapper">
-      <div class="calc-info">
+      <!-- <div class="calc-info">
         <span>Último gasto energético calculado</span>
-        <h2><!-- {{patient.kcal}} --> Kcal</h2>
-      </div>
+        <h2>{{patient.kcal}} Kcal</h2>
+      </div> -->
       <ion-button
         shape="round"
         [routerLink]="[activitiesPath]"
-        [queryParams]="{ id: patient.id, name: patient.name }"
+        [queryParams]="{ id: patientId, name: patientName }"
       >
         Calcular
       </ion-button>
     </div>
 
-    <div *ngIf="isLoading === false && isEditing === true" (click)="showConfirmAlert()" class="confirm-edit-wrapper" >
-      <ion-button shape="round">Editar</ion-button>
+    <div
+    *ngIf="isLoading === false && isEditing === true" class="confirm-edit-wrapper" >
+      <ion-button shape="round" (click)="showConfirmAlert()">Editar</ion-button>
     </div>
   </form>
 </ion-content>

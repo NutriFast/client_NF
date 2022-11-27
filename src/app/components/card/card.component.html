@@ -1,6 +1,6 @@
 <ion-card
   [routerLink]="[path]"
-  [queryParams]="{ id: patient.id }"
+  [queryParams]="{ id: patient.id, name: patient.name }"
 >
   <ion-card-header>
     <ion-avatar>
@@ -19,8 +19,8 @@
       <span>{{age}} anos</span>
     </div>
     <div>
-      <b>Gasto en.:</b>
-      <span><!-- {{patient.kcal}} Kcal --></span>
+      <!-- <b>Gasto en.:</b>
+      <span>{{patient.kcal}} Kcal</span> -->
     </div>
   </ion-card-content>
 </ion-card>

@@ -4,11 +4,11 @@
       <img src="https://ionicframework.com/docs/img/demos/avatar.svg">
     </ion-avatar>
 
-    <h3>{{patientName}}</h3>
+    <h3 *ngIf="isLoading === false">{{patientName}}</h3>
 
     <h1>Atividades Realizadas</h1>
 
-    <ion-row *ngIf="isLoading === true" class="statusRow">
+    <ion-row *ngIf="isLoading" class="statusRow">
       <ion-spinner name="bubbles" color="primary"></ion-spinner>
     </ion-row>
 
@@ -30,8 +30,8 @@
     </div>
 
     <ion-button
+      *ngIf="isLoading === false"
       class="add-activity-button"
-      [disabled]="isLoading"
       [routerLink]="[selectActivityPath]"
       [queryParams]="{ id: patientId, name: patientName, scheduleId: selectedSchedule.id }"
     >
@@ -39,20 +39,19 @@
       Nova atividade
     </ion-button>
 
-    <div class="button-wrapper">
+    <div *ngIf="isLoading === false" class="button-wrapper">
       <ion-button
         class="calc-button"
         shape="round"
         fill="outline"
         [routerLink]="[patientPath]"
-        [queryParams]="{ id: patientId }"
+        [queryParams]="{ id: patientId, name: patientName }"
       >
         Voltar
       </ion-button>
       <ion-button
         class="calc-button"
         shape="round"
-        [disabled]="isLoading"
         [routerLink]="[resultPath]"
         [queryParams]="{ id: patientId, name: patientName, schedule: stringifyActivitySchedule(patientActivitiesSchedule) }"
       >

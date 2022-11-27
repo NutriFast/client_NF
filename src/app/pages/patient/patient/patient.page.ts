@@ -16,6 +16,7 @@ import { Patient } from '../list/list-patients.page';
 export class PatientPage implements OnInit {
   patient: Patient;
   patientId: string;
+  patientName: string;
   patientAge: number;
 
   isLoading: boolean;
@@ -49,6 +50,7 @@ export class PatientPage implements OnInit {
       this.isEditing = false;
 
       this.patientId = queryParams.id;
+      this.patientName = queryParams.name;
 
       if(this.patientId) {
         /* this.clientService.getClient(this.patientId).subscribe((patient: Patient) => {
@@ -73,6 +75,8 @@ export class PatientPage implements OnInit {
               gender: this.patient.gender,
               birthDate: this.patient.birthDate
             });
+
+            console.log({thisPatient: this.patient});
           }
 
           this.patientAge = this.getAgeByBirthDate(this.patient.birthDate);
@@ -80,7 +84,7 @@ export class PatientPage implements OnInit {
           this.isLoading = false;
         });
       } else {
-        this.router.navigateByUrl('/tabs/list');
+        /* this.router.navigateByUrl('/tabs/list'); */
       }
     });
   }
@@ -90,8 +94,8 @@ export class PatientPage implements OnInit {
   }
 
   async showConfirmAlert() {
-    const formatedBirthDate = new Date(this.form.value.birthDate).toLocaleDateString();
     const name = this.form.value.name;
+    const formatedBirthDate = this.getFormatedBirthDate(this.patient.birthDate);
     const weight = this.form.value.weight;
     const height = this.form.value.height;
     const gender = this.form.value.gender;
@@ -122,27 +126,29 @@ export class PatientPage implements OnInit {
   }
 
   submit() {
-    console.log(this.form.value);
+    console.log({formValue: this.form.value});
     this.isLoading = true;
 
     const client = {
       id: this.patient.id,
-      userId: this.form.value.name,
-      name: this.patient.userId, // Invertido por causa de bug no back
+      userId: this.patient.userId,
+      name: this.form.value.name,
       birthDate: this.form.value.birthDate,
-      gender: this.form.value.gender
+      gender: this.form.value.gender,
+      height: this.form.value.height,
+      weight: this.form.value.weight
     };
 
-    console.log(client);
+    console.log({client});
 
     this.clientService.updateClient(client).subscribe(createdClient => {
-      console.log(createdClient);
+      console.log({createdClient});
       if(createdClient) {
         this.showCreatedAlert();
-        this.isEditing = false;
       }
 
       this.isLoading = false;
+      this.isEditing = false;
     });
   }
 
@@ -158,6 +164,10 @@ export class PatientPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  getFormatedBirthDate(birthDate: string) {
+    return new Date(birthDate).toLocaleDateString();
   }
 
   getAgeByBirthDate(birthDate: string) {

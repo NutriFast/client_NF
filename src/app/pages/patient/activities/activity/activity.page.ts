@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 import { ActivityDetail, ClientSchedule } from '../list/list-activities.page';
@@ -26,6 +26,7 @@ export class ActivityPage implements OnInit {
   form: FormGroup;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private alertController: AlertController,
@@ -47,7 +48,7 @@ export class ActivityPage implements OnInit {
       this.activity = JSON.parse(atob(queryParams.activity));
       this.scheduleId = queryParams.scheduleId;
 
-      console.log(this.activity);
+      console.log({thisActivity: this.activity});
 
       this.isEdit = queryParams.isEdit;
 
@@ -88,7 +89,7 @@ export class ActivityPage implements OnInit {
   }
 
   submit() {
-    console.log(this.form.value);
+    console.log({formValue: this.form.value});
     this.isLoading = true;
 
     const newActivity = {
@@ -97,28 +98,42 @@ export class ActivityPage implements OnInit {
       scheduleId: this.scheduleId
     };
 
-    this.activityScheduleService.postActivitySchedule(this.patientId, newActivity).subscribe(createdClient => {
-      console.log(createdClient);
-      if(createdClient) {
-        this.showCreatedAlert();
-        /* this.router.navigateByUrl('/tabs/list'); */
+    console.log({newActivity});
+
+    this.activityScheduleService.postActivitySchedule(this.patientId, newActivity).subscribe(includedActivity => {
+      console.log({includedActivity});
+      if(includedActivity) {
+        this.showIncludedActivityAlert();
       }
 
       this.isLoading = false;
     });
   }
 
-  async showCreatedAlert() {
+  async showIncludedActivityAlert() {
     const alert = await this.alertController.create({
       header: 'Atividade incluída com sucesso!',
       buttons: [
         {
           text: 'Ok',
-          role: 'cancel',
+          role: 'confirm',
+          handler: () => {
+            this.goBackToPatientActivities();
+          },
         },
       ],
     });
 
     await alert.present();
+  }
+
+  goBackToPatientActivities() {
+    this.router.navigateByUrl(
+      this.router.createUrlTree(
+        ['tabs/activities'], {
+          queryParams: { id: this.patientId, name: this.patientName},
+        }
+      )
+    );
   }
 }

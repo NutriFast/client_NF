@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ActivityService } from 'src/app/services/activity/activity.service';
 import { ActivityResult, ActivitySchedule, ActivityScheduleService } from 'src/app/services/activitySchedule/activity-schedule.service';
 import { ClientScheduleService } from 'src/app/services/clientSchedule/schedule.service';
@@ -35,7 +35,7 @@ export class ListActivitiesPage implements OnInit {
   patientId: string;
   patientName: string;
 
-  isLoading = false;
+  isLoading = true;
 
   selectedSchedule: ClientSchedule;
   patientActivitiesSchedule: ActivitySchedule;
@@ -43,6 +43,7 @@ export class ListActivitiesPage implements OnInit {
   patientActivitiesResult: Array<ActivityDetail>;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private clientScheduleService: ClientScheduleService,
     private activityScheduleService: ActivityScheduleService,
@@ -63,15 +64,12 @@ export class ListActivitiesPage implements OnInit {
       // Se existir da o get no activitySchedule
       // Se nao existir cria
 
-      // Permitir incluir atividade (post activitySchedule)
-      // Exibir o resultado no calcular (get activitySchedule)
+      if(this.patientId) {
+        this.activityService.getActivities().subscribe((activities: Array<Activity>) => {
+          console.log({activities});
 
-      this.activityService.getActivities().subscribe((activities: Array<Activity>) => {
-        console.log({activities});
+          this.activities = activities;
 
-        this.activities = activities;
-
-        if(this.patientId != null) {
           this.clientScheduleService.getClientSchedules(this.patientId).subscribe((clientSchedules: Array<ClientSchedule>) => {
             console.log({clientSchedules});
 
@@ -111,8 +109,10 @@ export class ListActivitiesPage implements OnInit {
               });
             }
           });
-        }
-      });
+        });
+      } else {
+        /* this.router.navigateByUrl('/tabs/list'); */
+      }
     });
   }
 
