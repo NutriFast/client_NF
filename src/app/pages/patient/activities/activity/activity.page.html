@@ -6,7 +6,7 @@
 
     <h3>{{patientName}}</h3>
 
-    <app-activity-card [activity]="activity" [isEdit]="false"></app-activity-card>
+    <app-activity-card [activity]="activity" [isLoading]="isLoading" [isEdit]="false"></app-activity-card>
 
     <ion-item>
       <ion-input formControlName="freequency"></ion-input>
@@ -20,34 +20,47 @@
 
     <a *ngIf="isEdit" class="delete-link">Excluir essa atividade para esse paciente</a>
 
-    <ion-button *ngIf="isEdit" class="custom-button" shape="round">
-      Editar
-    </ion-button>
+    <div *ngIf="isEdit" class="button-wrapper">
+      <ion-button
+        class="custom-button"
+        shape="round"
+        fill="outline"
+        [disabled]="isLoading"
+        [routerLink]="[activitiesPath]"
+        [queryParams]="{ id: patientId, name: patientName }"
+      >
+        Voltar
+      </ion-button>
 
-    <ion-button *ngIf="!isEdit" class="custom-button" shape="round" (click)="showConfirmAlert()">
-      Adicionar
-    </ion-button>
+      <ion-button
+        class="custom-button"
+        shape="round"
+        [disabled]="isLoading"
+      >
+        Editar
+      </ion-button>
+    </div>
 
-    <ion-button
-      *ngIf="isEdit"
-      class="custom-button"
-      shape="round"
-      fill="outline"
-      [routerLink]="[activitiesPath]"
-      [queryParams]="{ id: patientId, name: patientName }"
-    >
-      Voltar
-    </ion-button>
+    <div *ngIf="!isEdit" class="button-wrapper">
+      <ion-button
+        class="custom-button"
+        shape="round"
+        fill="outline"
+        [disabled]="isLoading"
+        [routerLink]="[selectActivityPath]"
+        [queryParams]="{ id: patientId, name: patientName }"
+      >
+        Voltar
+      </ion-button>
 
-    <ion-button
-      *ngIf="!isEdit"
-      class="custom-button"
-      shape="round"
-      fill="outline"
-      [routerLink]="[selectActivityPath]"
-      [queryParams]="{ id: patientId, name: patientName }"
-    >
-    Voltar
-  </ion-button>
+      <ion-button
+        class="custom-button"
+        shape="round"
+        [disabled]="isLoading"
+        (click)="showConfirmAlert()"
+      >
+        Adicionar
+      </ion-button>
+    </div>
   </form>
 </ion-content>
