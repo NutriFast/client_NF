@@ -10,6 +10,7 @@ import { ActivityDetail } from 'src/app/pages/patient/activities/list/list-activ
 export class ActivityCardComponent implements OnInit {
   @Input() activity: ActivityDetail;
   @Input() isEdit: boolean;
+  @Input() isLoading: boolean;
 
   constructor() { }
 
