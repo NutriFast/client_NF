@@ -51,7 +51,8 @@ const routes: Routes = [
       },
       {
         path: 'select',
-        loadChildren: () => import('../pages/patient/activities/select/select.module').then( m => m.SelectPageModule)
+        loadChildren: () => import('../pages/patient/activities/select/select.module').then( m => m.SelectPageModule),
+        canLoad: [AuthGuard]
       },
       {
         path: '',

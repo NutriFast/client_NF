@@ -6,7 +6,9 @@ import { CanLoad, Router } from '@angular/router';
 })
 export class AuthGuard implements CanLoad {
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router
+  ) {}
 
   canLoad() {
     const isAuthenticated = !!(+localStorage.getItem('authenticated'));
