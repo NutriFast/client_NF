@@ -46,4 +46,24 @@ export class ListPatientsPage implements OnInit {
       });
     });
   }
+
+  filterPatients(event: any) {
+    this.isLoading = true;
+    const filterParam = event.target.value;
+    console.log({filterParam});
+
+    this.patients = [];
+    this.clientService.getFilteredClients(filterParam).subscribe((patients: Array<Patient>) => {
+      console.log({filteredPatients: patients});
+      if(patients) {
+        patients.map((patient) => {
+          if(!this.patients.find((oldPatient) => oldPatient.id === patient.id)) {
+            this.patients.push(patient);
+          }
+        });
+      }
+
+      this.isLoading = false;
+    });
+  }
 }

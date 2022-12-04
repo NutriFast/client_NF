@@ -69,4 +69,24 @@ export class SelectPage implements OnInit {
       return 'alert-circle-outline';
     }
   }
+
+  filterActivities(event: any) {
+    this.isLoading = true;
+    const filterParam = event.target.value;
+    console.log({filterParam});
+
+    this.activities = [];
+    this.activityService.getFilteredActivities(filterParam).subscribe((activities: Array<ActivityDetail>) => {
+      console.log({filteredPatients: activities});
+      if(activities) {
+        activities.map((activity) => {
+          if(!this.activities.find((oldActivity) => oldActivity.id === activity.id)) {
+            this.activities.push({ ...activity, icon: this.setIconByActivity(activity.name) });
+          }
+        });
+      }
+
+      this.isLoading = false;
+    });
+  }
 }

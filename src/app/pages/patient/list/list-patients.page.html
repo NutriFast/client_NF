@@ -1,7 +1,11 @@
 <ion-content>
   <ion-grid class="container">
     <ion-row justify-content-center>
-      <ion-searchbar showCancelButton="focus"></ion-searchbar>
+      <ion-searchbar
+        searchIcon="search"
+        animated
+        (search)="filterPatients($event)"
+      ></ion-searchbar>
     </ion-row>
 
     <ion-row *ngIf="isLoading === true" class="statusRow">

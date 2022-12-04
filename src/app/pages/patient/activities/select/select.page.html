@@ -2,7 +2,11 @@
   <form class="container">
     <h1>Selecione a Atividade</h1>
 
-    <ion-searchbar showCancelButton="focus"></ion-searchbar>
+    <ion-searchbar
+      searchIcon="search"
+      animated
+      (search)="filterActivities($event)"
+    ></ion-searchbar>
 
     <ion-row *ngIf="isLoading === true" class="statusRow">
       <ion-spinner name="bubbles" color="primary"></ion-spinner>

@@ -25,6 +25,15 @@ export class ClientService {
     return this.http.get(url, { headers });
   }
 
+  getFilteredClients(filterParam: string) {
+    const accessToken = this.authService.getAccessTokenFromLocalStorage();
+    const headers = new HttpHeaders().set('Authorization', accessToken);
+
+    const url = this.baseUrl + '?name=' + filterParam;
+
+    return this.http.get(url, { headers });
+  }
+
   getClient(id: string) {
     const accessToken = this.authService.getAccessTokenFromLocalStorage();
     const headers = new HttpHeaders().set('Authorization', accessToken);
