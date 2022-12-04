@@ -174,8 +174,13 @@ export class PatientPage implements OnInit {
     const todaysDate = new Date();
     const convertedBirthDate = new Date(birthDate);
 
-    const age = todaysDate.getFullYear() - convertedBirthDate.getFullYear();
+    const diferenceInYears = todaysDate.getFullYear() - convertedBirthDate.getFullYear();
+    const diferenceInMonths = todaysDate.getMonth() - convertedBirthDate.getMonth();
 
-    return age;
+    if (diferenceInMonths < 0 || (diferenceInMonths === 0 && todaysDate.getDate() < convertedBirthDate.getDate())) {
+      return diferenceInYears - 1;
+    } else {
+      return diferenceInYears;
+    }
   }
 }
