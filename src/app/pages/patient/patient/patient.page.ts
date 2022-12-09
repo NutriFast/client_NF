@@ -141,10 +141,11 @@ export class PatientPage implements OnInit {
 
     console.log({client});
 
-    this.clientService.updateClient(client).subscribe(createdClient => {
+    this.clientService.updateClient(client).subscribe((createdClient: Patient) => {
       console.log({createdClient});
       if(createdClient) {
-        this.showCreatedAlert();
+        this.patient = createdClient;
+        this.patientAge = this.getAgeByBirthDate(this.patient.birthDate);
       }
 
       this.isLoading = false;
