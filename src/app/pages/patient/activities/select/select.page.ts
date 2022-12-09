@@ -59,12 +59,16 @@ export class SelectPage implements OnInit {
   setIconByActivity(name: string) {
     if(name === 'Academia') {
       return 'barbell-outline';
-    } else if (name === 'Correr') {
-      return 'walk-outline';
-    } else if (name === 'Ciclismo') {
+    }else if (name === 'Ciclismo') {
       return 'bicycle-outline';
-    } else if (name === 'Dormir') {
+    }  else if (name === 'Dirigir') {
+      return 'car-sport-outline';
+    } else if (name === 'Estudar') {
+      return 'book-outline';
+    } else if (name === 'Dormir' || name === 'Sono') {
       return 'bed-outline';
+    } else if (name === 'Correr' || name === 'Caminhar') {
+      return 'walk-outline';
     } else {
       return 'alert-circle-outline';
     }
