@@ -5,7 +5,7 @@
 
     <form [formGroup]="form" class="formWrapper">
       <ion-item *ngIf="currentStep.id === 1" class="textInput">
-        <ion-input type="text" placeholder="Nome" formControlName="name"></ion-input>
+        <ion-input required type="text" placeholder="Nome" formControlName="name"></ion-input>
       </ion-item>
 
       <ion-item *ngIf="currentStep.id === 2" lines="none">
@@ -21,11 +21,11 @@
       <ion-item *ngIf="currentStep.id === 3" class="textInput" lines="none">
         <ion-item>
           <ion-label position="floating">Peso</ion-label>
-          <ion-input inputmode="numeric" placeholder="(kg)" formControlName="weight"></ion-input>
+          <ion-input required type="number" inputmode="numeric" placeholder="(kg)" formControlName="weight"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating">Altura</ion-label>
-          <ion-input inputmode="numeric" placeholder="(m)" formControlName="height"></ion-input>
+          <ion-input required type="number" inputmode="numeric" placeholder="(m)" formControlName="height"></ion-input>
         </ion-item>
       </ion-item>
 

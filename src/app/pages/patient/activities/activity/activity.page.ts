@@ -65,27 +65,33 @@ export class ActivityPage implements OnInit {
     const duration = this.form.value.duration;
     const freequency = this.form.value.freequency;
 
-    const alert = await this.alertController.create({
-      header: 'Revise antes de enviar!',
-      buttons: [
-        {
-          text: 'Voltar',
-          role: 'cancel',
-        },
-        {
-          text: 'Enviar',
-          role: 'confirm',
-          handler: () => {
-            this.submit();
+    if(!freequency) {
+      this.showErrorAlert('Favor preencher o campo Dias / Semana');
+    } else if (!duration) {
+      this.showErrorAlert('Favor preencher o campo Horas / Dia');
+    } else {
+      const alert = await this.alertController.create({
+        header: 'Revise antes de enviar!',
+        buttons: [
+          {
+            text: 'Voltar',
+            role: 'cancel',
           },
-        },
-      ],
-      message: `Atividade: ${this.activity.name}
-                Dias / Semana: ${duration ? duration : 'vazio!'},
-                Horas / Dia: ${freequency ? freequency : 'vazio!'}`,
-    });
+          {
+            text: 'Enviar',
+            role: 'confirm',
+            handler: () => {
+              this.submit();
+            },
+          },
+        ],
+        message: `Atividade: ${this.activity.name}
+                  Dias / Semana: ${duration ? duration : 'vazio!'},
+                  Horas / Dia: ${freequency ? freequency : 'vazio!'}`,
+      });
 
-    await alert.present();
+      await alert.present();
+    }
   }
 
   submit() {
@@ -120,6 +126,20 @@ export class ActivityPage implements OnInit {
           handler: () => {
             this.goBackToPatientActivities();
           },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async showErrorAlert(msg: string) {
+    const alert = await this.alertController.create({
+      header: msg,
+      buttons: [
+        {
+          text: 'Voltar',
+          role: 'confirm'
         },
       ],
     });

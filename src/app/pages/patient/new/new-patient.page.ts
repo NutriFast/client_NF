@@ -79,40 +79,56 @@ export class NewPatientPage implements OnInit {
     const height = this.form.value.height;
     const gender = this.form.value.gender;
 
-    const alert = await this.alertController.create({
-      header: 'Revise antes de enviar!',
-      buttons: [
-        {
-          text: 'Voltar',
-          role: 'cancel',
-        },
-        {
-          text: 'Enviar',
-          role: 'confirm',
-          handler: () => {
-            this.submit();
+    if(!name) {
+      this.showErrorAlert('Favor preencher o nome do Paciente', 1);
+    } else if (!weight) {
+      this.showErrorAlert('Favor preencher o peso do Paciente', 3);
+    } else if (!height) {
+      this.showErrorAlert('Favor preencher a altura do Paciente', 3);
+    } else if (!gender) {
+      this.showErrorAlert('Favor preencher o gênero do Paciente', 4);
+    } else if (!this.form.value.birthDate) {
+      this.showErrorAlert('Favor preencher a da de nascimento do Paciente', 2);
+    } else {
+      const alert = await this.alertController.create({
+        header: 'Revise antes de enviar!',
+        buttons: [
+          {
+            text: 'Voltar',
+            role: 'cancel',
           },
-        },
-      ],
-      message: `Nome: ${name ? name : 'vazio!'},
-                Data de Nascimento: ${formatedBirthDate},
-                Peso: ${weight ? weight + ' kg' : 'vazio!'},
-                Altura: ${height ? height + ' m' : 'vazio!'},
-                Gênero: ${gender ? gender : 'vazio!'}`,
-    });
+          {
+            text: 'Enviar',
+            role: 'confirm',
+            handler: () => {
+              this.submit();
+            },
+          },
+        ],
+        message: `Nome: ${name ? name : 'vazio!'},
+                  Data de Nascimento: ${formatedBirthDate},
+                  Peso: ${weight ? weight + ' kg' : 'vazio!'},
+                  Altura: ${height ? height + ' m' : 'vazio!'},
+                  Gênero: ${gender ? gender : 'vazio!'}`,
+      });
 
-    await alert.present();
+      await alert.present();
+    }
   }
 
   submit() {
-    console.log(this.form.value);
     this.isLoading = true;
 
-    this.clientService.postClient(this.form.value).subscribe(createdClient => {
+    const client = this.form.value;
+    console.log({client});
+
+    this.clientService.postClient(client).subscribe(createdClient => {
       console.log(createdClient);
       if(createdClient) {
         this.showCreatedAlert();
         this.router.navigateByUrl('/tabs/list');
+      } else {
+        this.showErrorAlert('Erro ao cadastrar o paciente, favor revisar os dados!', 1);
       }
 
       this.isLoading = false;
@@ -126,6 +142,23 @@ export class NewPatientPage implements OnInit {
         {
           text: 'Ok',
           role: 'cancel',
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async showErrorAlert(msg: string, step: number) {
+    const alert = await this.alertController.create({
+      header: msg,
+      buttons: [
+        {
+          text: 'Voltar',
+          role: 'confirm',
+          handler: () => {
+            this.currentStep = this.steps[step - 1];
+          },
         },
       ],
     });
