@@ -19,6 +19,8 @@ export interface ActivitySchedule {
 	sumPT: number;
 	TPR: number;
 	FAF: number;
+	GE: number;
+  status: string;
 }
 
 @Injectable({
