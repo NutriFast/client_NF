@@ -99,7 +99,9 @@ export class NutriPage implements OnInit {
       'Faxinar - espanar',
       'Faxinar - limpeza geral (Moderado)',
       'Atividads Domesticas - Varrer',
-      'Atividads Domesticas - Implicando ficar em pé'
+      'Atividads Domesticas - Implicando ficar em pé',
+      'Atividades Domesticas - Varrer',
+      'Atividades Domesticas - Implicando ficar em pé'
     ];
 
     if(listBarbellIcon.includes(activityName)) {
