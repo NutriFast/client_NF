@@ -5,7 +5,7 @@
         <ion-icon *ngIf="!isLoading" slot="icon-only" name="{{activity.icon}}"></ion-icon>
         <ion-spinner *ngIf="isLoading" name="bubbles" color="primary"></ion-spinner>
       </ion-button>
-      <span>{{activity.name}}</span>
+      <span>{{activity.name.replace('Atividads','Atividades')}}</span>
     </div>
     <div *ngIf="isEdit" class="info-wrapper">
       <b>{{activity.freequency}}/SEMANA</b>
