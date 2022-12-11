@@ -61,7 +61,7 @@
   align-items: center;
   justify-content: center;
 
-  margin-bottom: 25px;
+  margin-bottom: 50px;
 
   > ion-spinner {
     transform: scale(1.5);
@@ -70,4 +70,12 @@
   > ion-text {
     opacity: 0.4;
   }
+}
+
+.activities-list {
+  max-height: 45vh;
+  overflow: scroll;
+
+  margin-bottom: 15px;
+  border-bottom: 1px solid #555;
 }

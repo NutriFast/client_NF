@@ -12,7 +12,7 @@
       <ion-spinner name="bubbles" color="primary"></ion-spinner>
     </ion-row>
 
-    <div *ngIf="isLoading === false">
+    <div *ngIf="isLoading === false" class="activities-list">
       <ion-grid *ngFor="let activity of activities; let colIndex=index">
         <app-activity-card
           [activity]="activity"

@@ -12,13 +12,13 @@
       <ion-spinner name="bubbles" color="primary"></ion-spinner>
     </ion-row>
 
-    <div *ngIf="isLoading === false">
+    <div *ngIf="isLoading === false" class="activities-list">
       <ion-grid *ngFor="let activity of patientActivitiesResult; let colIndex=index">
         <app-activity-card
           [activity]="activity"
           [isEdit]="true"
           [routerLink]="[activityPath]"
-          [queryParams]="{ id: patientId, name: patientName, isEdit: true, activity: stringifyActivityDetail(activity) }"
+          [queryParams]="{ id: patientId, name: patientName, isEdit: true, activity: stringifyActivityDetail(activity), scheduleId: selectedSchedule.id }"
         ></app-activity-card>
       </ion-grid>
 
