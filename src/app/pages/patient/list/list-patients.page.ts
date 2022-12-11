@@ -38,6 +38,11 @@ export class ListPatientsPage implements OnInit {
           patients.map((patient) => {
             if(!this.patients.find((oldPatient) => oldPatient.id === patient.id)) {
               this.patients.push(patient);
+            } else {
+              const updatedPatient = this.patients.find((oldPatient) => oldPatient.id === patient.id);
+              const patientIndex = this.patients.indexOf(updatedPatient);
+
+              this.patients[patientIndex] = patient;
             }
           });
         }

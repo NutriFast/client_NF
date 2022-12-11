@@ -95,7 +95,7 @@ export class PatientPage implements OnInit {
 
   async showConfirmAlert() {
     const name = this.form.value.name;
-    const formatedBirthDate = this.getFormatedBirthDate(this.patient.birthDate);
+    const formatedBirthDate = this.getFormatedBirthDate(this.form.value.birthDate);
     const weight = this.form.value.weight;
     const height = this.form.value.height;
     const gender = this.form.value.gender;
