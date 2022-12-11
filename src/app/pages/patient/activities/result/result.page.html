@@ -6,8 +6,11 @@
     </ion-avatar>
     <h3>{{patientName}}</h3>
 
-    <h2>é de <b><u>{{activitiesSchedule.GE}}</u> Kcal</b></h2>
-    <h2><b><u>{{activitiesSchedule.status}}</u></b></h2>
+    <h2>é de <b [ngStyle]="{'color': '#2C9042'}"><u>{{activitiesSchedule.GE}}</u> Kcal</b></h2>
+
+    <h2 [ngStyle]="{'color': statusTextColor}" *ngIf="statusTextColor !== null">
+      <b><u>{{activitiesSchedule.status}}</u></b>
+    </h2>
 
     <ion-button
       class="back-button"

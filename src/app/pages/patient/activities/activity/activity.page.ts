@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
-import { ActivityDetail, ClientSchedule } from '../list/list-activities.page';
+import { ActivityDetail } from '../list/list-activities.page';
 import { AlertController } from '@ionic/angular';
 import { ActivityScheduleService } from 'src/app/services/activitySchedule/activity-schedule.service';
+import { ClientScheduleService } from 'src/app/services/clientSchedule/schedule.service';
 
 @Component({
   selector: 'app-activity',
@@ -30,6 +31,7 @@ export class ActivityPage implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private alertController: AlertController,
+    private clientScheduleService: ClientScheduleService,
     private activityScheduleService: ActivityScheduleService
   ) {
     this.form = this.formBuilder.group({
@@ -98,22 +100,43 @@ export class ActivityPage implements OnInit {
     console.log({formValue: this.form.value});
     this.isLoading = true;
 
-    const newActivity = {
-      ...this.form.value,
-      activityId: this.activity.id,
-      scheduleId: this.scheduleId
-    };
+    if(this.isEdit) {
+      /* const activity = {
+        ...this.form.value,
+        id: this.activity.id,
+        scheduleId: this.scheduleId
+      };
 
-    console.log({newActivity});
+      console.log(activity);
 
-    this.activityScheduleService.postActivitySchedule(this.patientId, newActivity).subscribe(includedActivity => {
-      console.log({includedActivity});
-      if(includedActivity) {
-        this.showIncludedActivityAlert();
-      }
+      this.clientScheduleService.updateActivityFromClientSchedule(activity.id, activity).subscribe(editedActivity => {
+        console.log({editedActivity});
+        if(editedActivity) {
+          this.showEditedActivityAlert();
+        }
 
-      this.isLoading = false;
-    });
+        this.isLoading = false;
+      }); */
+
+      this.showNotAvailableAlert();
+    } else {
+      const newActivity = {
+        ...this.form.value,
+        activityId: this.activity.id,
+        scheduleId: this.scheduleId
+      };
+
+      console.log({newActivity});
+
+      this.activityScheduleService.postActivitySchedule(this.patientId, newActivity).subscribe(includedActivity => {
+        console.log({includedActivity});
+        if(includedActivity) {
+          this.showIncludedActivityAlert();
+        }
+
+        this.isLoading = false;
+      });
+    }
   }
 
   async showIncludedActivityAlert() {
@@ -133,13 +156,16 @@ export class ActivityPage implements OnInit {
     await alert.present();
   }
 
-  async showErrorAlert(msg: string) {
+  async showEditedActivityAlert() {
     const alert = await this.alertController.create({
-      header: msg,
+      header: 'Atividade editada com sucesso!',
       buttons: [
         {
-          text: 'Voltar',
-          role: 'confirm'
+          text: 'Ok',
+          role: 'confirm',
+          handler: () => {
+            this.goBackToPatientActivities();
+          },
         },
       ],
     });
@@ -155,5 +181,67 @@ export class ActivityPage implements OnInit {
         }
       )
     );
+  }
+
+  async showErrorAlert(msg: string) {
+    const alert = await this.alertController.create({
+      header: msg,
+      buttons: [
+        {
+          text: 'Voltar',
+          role: 'confirm'
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async showDeleteAlert() {
+    const alert = await this.alertController.create({
+      header: 'Atenção! Deseja mesmo excluir essa atividade?',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'confirm'
+        },
+        {
+          text: 'Sim',
+          role: 'confirm',
+          handler: () => {
+            this.submitDelete();
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  submitDelete() {
+    this.isLoading = true;
+
+    /* this.clientScheduleService.deleteActivityFromClientSchedule(this.activity.id).subscribe(_ => {
+      this.goBackToPatientActivities();
+      this.isLoading = false;
+    }); */
+    this.showNotAvailableAlert();
+  }
+
+  async showNotAvailableAlert() {
+    const alert = await this.alertController.create({
+      header: 'Infelizmente essa funcionalidade não está disponível no momento.',
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'confirm',
+          handler: () => {
+            this.isLoading = false;
+          },
+        }
+      ],
+    });
+
+    await alert.present();
   }
 }

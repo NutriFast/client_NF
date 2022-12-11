@@ -9,12 +9,13 @@ import { ActivitySchedule } from 'src/app/services/activitySchedule/activity-sch
   styleUrls: ['./result.page.scss'],
 })
 export class ResultPage implements OnInit {
-  result = 2000;
   path = '/tabs/activities';
 
   patientId: string;
   patientName: string;
   activitiesSchedule: ActivitySchedule;
+
+  statusTextColor: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,9 +26,26 @@ export class ResultPage implements OnInit {
       this.patientId = queryParams.id;
       this.patientName = queryParams.name;
 
-      this.activitiesSchedule = JSON.parse(atob(queryParams.schedule));
+      const parsedActivitySchedule = JSON.parse(atob(queryParams.schedule));
 
+      this.activitiesSchedule = parsedActivitySchedule;
+
+      this.setColorByStatus(this.activitiesSchedule.status);
       console.log({activitiesSchedule: this.activitiesSchedule});
+      console.log({statusTextColor: this.statusTextColor});
+
     });
+  }
+
+  setColorByStatus(status: string) {
+
+    console.log(status);
+    if(status === 'Sedentário') {
+      this.statusTextColor = '#ffd534';
+    } else if(status === 'Numero insuficiente de atividades') {
+      this.statusTextColor = '#ff4961';
+    } else {
+      this.statusTextColor = '#2C9042';
+    }
   }
 }
