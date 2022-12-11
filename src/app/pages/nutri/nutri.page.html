@@ -1,9 +1,30 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Página 3!</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <form class="container">
+    <h1>Consulta de Atividades</h1>
 
+    <ion-searchbar
+      searchIcon="search"
+      animated
+      (search)="filterActivities($event)"
+    ></ion-searchbar>
+
+    <ion-row *ngIf="isLoading === true" class="statusRow">
+      <ion-spinner name="bubbles" color="primary"></ion-spinner>
+    </ion-row>
+
+    <div *ngIf="isLoading === false">
+      <ion-grid *ngFor="let activity of activities; let colIndex=index">
+        <app-activity-card
+          [activity]="activity"
+          [isEdit]="false"
+        ></app-activity-card>
+      </ion-grid>
+
+      <ion-row *ngIf="activities.length === 0" class="statusRow">
+        <ion-text>
+          Nenhuma atividade encontrada
+        </ion-text>
+      </ion-row>
+    </div>
+  </form>
 </ion-content>

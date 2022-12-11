@@ -1,4 +1,29 @@
-ion-header {
-  margin-top: 50vh;
-  opacity: 0.5;
+.container {
+  margin-top: 80px;
+
+  > h1 {
+    font-family: 'Montserrat';
+    font-weight: 800;
+    font-size: 22px;
+    padding-left: 15px;
+
+
+    color: #2C9142;
+  }
+}
+
+.statusRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 55px;
+
+  > ion-spinner {
+    transform: scale(2);
+  }
+
+  > ion-text {
+    opacity: 0.4;
+  }
 }

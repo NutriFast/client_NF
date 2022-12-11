@@ -4,14 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NutriPageRoutingModule } from './nutri-routing.module';
 import { NutriPage } from './nutri.page';
+import { ActivityCardModule } from '../../components/activity-card/activity-card.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    NutriPageRoutingModule
-  ],
-  declarations: [NutriPage]
+    declarations: [NutriPage],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        NutriPageRoutingModule,
+        ActivityCardModule
+    ]
 })
 export class NutriPageModule {}
