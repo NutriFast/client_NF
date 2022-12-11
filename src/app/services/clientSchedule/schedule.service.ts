@@ -32,4 +32,22 @@ export class ClientScheduleService {
 
     return this.http.post(url, {}, { headers });
   }
+
+  deleteActivityFromClientSchedule(id: string) {
+    const accessToken = this.authService.getAccessTokenFromLocalStorage();
+    const headers = new HttpHeaders().set('Authorization', accessToken);
+
+    const url = this.baseUrl + '/' + id;
+
+    return this.http.delete(url, { headers });
+  }
+
+  updateActivityFromClientSchedule(id: string, activity: any) {
+    const accessToken = this.authService.getAccessTokenFromLocalStorage();
+    const headers = new HttpHeaders().set('Authorization', accessToken);
+
+    const url = this.baseUrl + '/' + id;
+
+    return this.http.patch(url, activity, { headers });
+  }
 }
