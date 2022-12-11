@@ -145,20 +145,64 @@ export class ListActivitiesPage implements OnInit {
     return patientActivitiesResult;
   }
 
-  setIconByActivity(name: string) {
-    if(name === 'Academia') {
+  setIconByActivity(activityName: string) {
+    const listBarbellIcon = [
+      'Exercício de academia (Geral)',
+      'Levantamento de peso (Vigoroso)',
+      'Calistenia/Exercício de casa (Leve ou Moderado)',
+      'Calistenia (Vigoroso)'
+    ];
+
+    const listBicycleIcon = [
+      'Bicicleta ergométrica (Moderado)',
+      'Bicicleta ergométrica (Vigoroso)'
+    ];
+
+    const listCarIcon = [
+      'Dirigir'
+    ];
+
+    const listBookIcon = [
+      'Estudar'
+    ];
+
+    const listBedIcon = [
+      'Sono'
+    ];
+
+    const listWalkIcon = [
+      'Caminhar',
+      'Esteira Ergométrica (Geral)'
+    ];
+
+    const listCartIcon = [
+      'Padaria (Leve)'
+    ];
+
+    const listHomeIcon = [
+      'Faxinar - limpar pia e banheiro',
+      'Faxinar - espanar',
+      'Faxinar - limpeza geral (Moderado)',
+      'Atividads Domesticas - Varrer'
+    ];
+
+    if(listBarbellIcon.includes(activityName)) {
       return 'barbell-outline';
-    }else if (name === 'Ciclismo') {
+    }else if (listBicycleIcon.includes(activityName)) {
       return 'bicycle-outline';
-    }  else if (name === 'Dirigir') {
+    }  else if (listCarIcon.includes(activityName)) {
       return 'car-sport-outline';
-    } else if (name === 'Estudar') {
+    } else if (listBookIcon.includes(activityName)) {
       return 'book-outline';
-    } else if (name === 'Dormir' || name === 'Sono') {
+    } else if (listBedIcon.includes(activityName)) {
       return 'bed-outline';
-    } else if (name === 'Correr' || name === 'Caminhar') {
+    } else if (listWalkIcon.includes(activityName)) {
       return 'walk-outline';
-    } else {
+    } else if (listCartIcon.includes(activityName)) {
+      return 'cart-outline';
+    } else if (listHomeIcon.includes(activityName)) {
+      return 'home-outline';
+    }  else {
       return 'alert-circle-outline';
     }
   }

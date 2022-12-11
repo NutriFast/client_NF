@@ -43,6 +43,7 @@ export class SelectPage implements OnInit {
           });
         }
 
+        this.activities = this.activities.sort((a, b) => a.name.localeCompare(b.name));
         this.isLoading = false;
       });
     });
@@ -54,24 +55,6 @@ export class SelectPage implements OnInit {
 
   stringifySchedule(clientSchedule: ClientSchedule) {
     return btoa(JSON.stringify(clientSchedule));
-  }
-
-  setIconByActivity(name: string) {
-    if(name === 'Academia') {
-      return 'barbell-outline';
-    }else if (name === 'Ciclismo') {
-      return 'bicycle-outline';
-    }  else if (name === 'Dirigir') {
-      return 'car-sport-outline';
-    } else if (name === 'Estudar') {
-      return 'book-outline';
-    } else if (name === 'Dormir' || name === 'Sono') {
-      return 'bed-outline';
-    } else if (name === 'Correr' || name === 'Caminhar') {
-      return 'walk-outline';
-    } else {
-      return 'alert-circle-outline';
-    }
   }
 
   filterActivities(event: any) {
@@ -92,5 +75,70 @@ export class SelectPage implements OnInit {
 
       this.isLoading = false;
     });
+  }
+
+  setIconByActivity(activityName: string) {
+    const listBarbellIcon = [
+      'Exercício de academia (Geral)',
+      'Levantamento de peso (Vigoroso)',
+      'Calistenia/Exercício de casa (Leve ou Moderado)',
+      'Calistenia (Vigoroso)'
+    ];
+
+    const listBicycleIcon = [
+      'Bicicleta ergométrica (Moderado)',
+      'Bicicleta ergométrica (Vigoroso)',
+      'Bicicleta ergométrica (Suave)',
+      'Bicicleta ergométrica (Muito Vigoroso)'
+    ];
+
+    const listCarIcon = [
+      'Dirigir'
+    ];
+
+    const listBookIcon = [
+      'Estudar'
+    ];
+
+    const listBedIcon = [
+      'Sono'
+    ];
+
+    const listWalkIcon = [
+      'Caminhar',
+      'Esteira Ergométrica (Geral)'
+    ];
+
+    const listCartIcon = [
+      'Padaria (Leve)'
+    ];
+
+    const listHomeIcon = [
+      'Faxinar - limpar pia e banheiro',
+      'Faxinar - espanar',
+      'Faxinar - limpeza geral (Moderado)',
+      'Atividads Domesticas - Varrer',
+      'Atividads Domesticas - Implicando ficar em pé'
+    ];
+
+    if(listBarbellIcon.includes(activityName)) {
+      return 'barbell-outline';
+    }else if (listBicycleIcon.includes(activityName)) {
+      return 'bicycle-outline';
+    }  else if (listCarIcon.includes(activityName)) {
+      return 'car-sport-outline';
+    } else if (listBookIcon.includes(activityName)) {
+      return 'book-outline';
+    } else if (listBedIcon.includes(activityName)) {
+      return 'bed-outline';
+    } else if (listWalkIcon.includes(activityName)) {
+      return 'walk-outline';
+    } else if (listCartIcon.includes(activityName)) {
+      return 'cart-outline';
+    } else if (listHomeIcon.includes(activityName)) {
+      return 'home-outline';
+    }  else {
+      return 'alert-circle-outline';
+    }
   }
 }

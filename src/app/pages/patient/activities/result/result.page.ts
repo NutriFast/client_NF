@@ -38,9 +38,7 @@ export class ResultPage implements OnInit {
   }
 
   setColorByStatus(status: string) {
-
-    console.log(status);
-    if(status === 'Sedentário') {
+    if(status === 'Sedentário' || status === 'Pouco Ativo') {
       this.statusTextColor = '#ffd534';
     } else if(status === 'Numero insuficiente de atividades') {
       this.statusTextColor = '#ff4961';
